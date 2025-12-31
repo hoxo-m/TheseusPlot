@@ -8,23 +8,25 @@ Authors@R: c(
     person("Daisuke", "Ichikawa", role = "exp"),
     person("LY Corporation Analytics Solution Enhancement Team", role = "spn")
   )
-Description: Provides tools for decomposing differences in rate metrics between
-    two groups into contributions from individual subgroups and visualizing them
-    as a "Theseus Plot". Inspired by the story of the Ship of Theseus, the method
-    replaces subgroup data from one group with that of another step by step,
-    recalculating the overall metric at each stage to quantify subgroup contributions.
-    A Theseus Plot combines the stepwise progression of a waterfall plot with
-    the comparative bars of a bar chart, offering an intuitive way to understand
-    subgroup-level effects.
+Description: Provides tools for decomposing differences in rate metrics
+    between two groups into contributions from individual subgroups and
+    visualizing them as a "Theseus Plot". Inspired by the story of the
+    Ship of Theseus, the method replaces subgroup data from one group with
+    that of another step by step, recalculating the overall metric at each
+    stage to quantify subgroup contributions.  A Theseus Plot combines the
+    stepwise progression of a waterfall plot with the comparative bars of
+    a bar chart, offering an intuitive way to understand subgroup-level
+    effects.
 License: MIT + file LICENSE
-URL: https://github.com/hoxo-m/TheseusPlot, https://hoxo-m.github.io/TheseusPlot/
+URL: https://github.com/hoxo-m/TheseusPlot,
+    https://hoxo-m.github.io/TheseusPlot/
 BugReports: https://github.com/hoxo-m/TheseusPlot/issues
 Depends:
     R (>= 4.1.0)
 Imports:
     dplyr,
-    ggplot2,
     forcats,
+    ggplot2,
     memoise,
     R6,
     rlang,
@@ -34,6 +36,8 @@ Imports:
     tidyr,
     waterfalls
 Suggests:
-    nycflights13
+    knitr,
+    nycflights13,
+    rmarkdown
 Encoding: UTF-8
 RoxygenNote: 7.3.2
