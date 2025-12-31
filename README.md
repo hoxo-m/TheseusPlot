@@ -40,6 +40,15 @@ Thus, the contribution of the female group is -0.2 percentage points.
 
 When visualized, the results appear as follows:
 
+    #> Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
+    #> ℹ Please use tidy evaluation idioms with `aes()`.
+    #> ℹ See also `vignette("ggplot2-in-packages")` for more information.
+    #> ℹ The deprecated feature was likely used in the waterfalls package.
+    #>   Please report the issue to the authors.
+    #> This warning is displayed once every 8 hours.
+    #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    #> generated.
+
 ![](man/figures/README-overview-1.png)<!-- -->
 
 From this plot, we can see that the decline in the metric is primarily
@@ -90,7 +99,7 @@ library(nycflights13)
 
 data <- flights |> 
   filter(!is.na(arr_delay)) |>
-  mutate(on_time = arr_delay <= 0) |>  # Arrived on time
+  mutate(on_time = arr_delay <= 15) |>  # Arrived on time
   left_join(airlines, by = "carrier") |>
   mutate(carrier = name) |>  # Convert carrier abbreviations to full names
   select(year, month, day, origin, dest, carrier, dep_delay, on_time)
@@ -99,20 +108,20 @@ data |> head()
 #> # A tibble: 6 × 8
 #>    year month   day origin dest  carrier                dep_delay on_time
 #>   <int> <int> <int> <chr>  <chr> <chr>                      <dbl> <lgl>  
-#> 1  2013     1     1 EWR    IAH   United Air Lines Inc.          2 FALSE  
+#> 1  2013     1     1 EWR    IAH   United Air Lines Inc.          2 TRUE   
 #> 2  2013     1     1 LGA    IAH   United Air Lines Inc.          4 FALSE  
 #> 3  2013     1     1 JFK    MIA   American Airlines Inc.         2 FALSE  
 #> 4  2013     1     1 JFK    BQN   JetBlue Airways               -1 TRUE   
 #> 5  2013     1     1 LGA    ATL   Delta Air Lines Inc.          -6 TRUE   
-#> 6  2013     1     1 EWR    ORD   United Air Lines Inc.         -4 FALSE
+#> 6  2013     1     1 EWR    ORD   United Air Lines Inc.         -4 TRUE
 
 data_Nov <- data |> filter(month == 11)
 data_Dec <- data |> filter(month == 12)
 
 data_Nov |> summarise(on_time_rate = mean(on_time)) |> pull(on_time_rate)
-#> [1] 0.6426161
+#> [1] 0.8264803
 data_Dec |> summarise(on_time_rate = mean(on_time)) |> pull(on_time_rate)
-#> [1] 0.4672835
+#> [1] 0.6738712
 ```
 
 ### 3.2 Basics
@@ -163,9 +172,9 @@ ship$table(origin)
 #> # A tibble: 3 × 8
 #>   origin contrib    n1    n2    x1    x2 rate1 rate2
 #>   <chr>    <dbl> <int> <int> <int> <int> <dbl> <dbl>
-#> 1 EWR    -0.0831  9603  9410  6251  3901 0.651 0.415
-#> 2 JFK    -0.0565  8645  8923  5702  4332 0.660 0.485
-#> 3 LGA    -0.0358  8723  8687  5379  4393 0.617 0.506
+#> 1 EWR    -0.0719  9603  9410  7995  5910 0.833 0.628
+#> 2 JFK    -0.0502  8645  8923  7290  6142 0.843 0.688
+#> 3 LGA    -0.0305  8723  8687  7006  6156 0.803 0.709
 ```
 
 ### 3.3 Flipping the Plot
@@ -185,7 +194,7 @@ are more than 10 subgroups, but the threshold can be adjusted with the
 `n` argument.
 
 ``` r
-ship$plot_flip(carrier, n = 5)
+ship$plot_flip(carrier, n = 6)
 ```
 
 ![](man/figures/README-prot_carrier_n-1.png)<!-- -->
@@ -211,7 +220,7 @@ can modify these settings by passing the return value of
 `continuous_config()` to the `continuous` argument.
 
 ``` r
-ship$plot_flip(dep_delay, continuous = continuous_config(n = 5))
+ship$plot_flip(dep_delay, continuous = continuous_config(n = 3))
 ```
 
 ![](man/figures/README-plot_dep_delay_n-1.png)<!-- -->

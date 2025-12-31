@@ -106,7 +106,7 @@ library(nycflights13)
 
 data <- flights |> 
   filter(!is.na(arr_delay)) |>
-  mutate(on_time = arr_delay <= 0) |>  # Arrived on time
+  mutate(on_time = arr_delay <= 15) |>  # Arrived on time
   left_join(airlines, by = "carrier") |>
   mutate(carrier = name) |>  # Convert carrier abbreviations to full names
   select(year, month, day, origin, dest, carrier, dep_delay, on_time)
@@ -168,7 +168,7 @@ When the number of subgroups is large, those with small contributions are automa
 By default, this happens when there are more than 10 subgroups, but the threshold can be adjusted with the `n` argument.
 
 ```{r prot_carrier_n}
-ship$plot_flip(carrier, n = 5)
+ship$plot_flip(carrier, n = 6)
 ```
 
 From this plot, JetBlue Airways and United Air Lines appear to have the largest contributions to the decline in on-time arrival rate.
@@ -187,7 +187,7 @@ By default, continuous variables are discretized so that each subgroup has rough
 You can modify these settings by passing the return value of `continuous_config()` to the `continuous` argument.
 
 ```{r plot_dep_delay_n}
-ship$plot_flip(dep_delay, continuous = continuous_config(n = 5))
+ship$plot_flip(dep_delay, continuous = continuous_config(n = 3))
 ```
 
 This result shows that both a decrease in on-time departures and an increase in delayed departures contributed to the decline in on-time arrival rate.
