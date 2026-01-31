@@ -40,15 +40,6 @@ Thus, the contribution of the female group is -0.2 percentage points.
 
 When visualized, the results appear as follows:
 
-    #> Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
-    #> ℹ Please use tidy evaluation idioms with `aes()`.
-    #> ℹ See also `vignette("ggplot2-in-packages")` for more information.
-    #> ℹ The deprecated feature was likely used in the waterfalls package.
-    #>   Please report the issue to the authors.
-    #> This warning is displayed once every 8 hours.
-    #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-    #> generated.
-
 ![](man/figures/README-overview-1.png)<!-- -->
 
 From this plot, we can see that the decline in the metric is primarily
