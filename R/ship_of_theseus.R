@@ -240,7 +240,7 @@ ShipOfTheseus <- R6::R6Class(
             filter(!(!!rlang::sym(column_name) %in% target)) |>
             count() |>
             mutate(type = labels[1], items = other_name)
-          data2_size_other <- data1 |>
+          data2_size_other <- data2 |>
             filter(!(!!rlang::sym(column_name) %in% target)) |>
             count() |>
             mutate(type = labels[2], items = other_name)
