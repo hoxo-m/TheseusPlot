@@ -104,7 +104,7 @@ ShipOfTheseus <- R6::R6Class(
                 group_by(x) |>
                 summarise(y = mean(y)) |>
                 mutate(diff1 = abs(lead(y) - y))
-              data2_tmp <- d1 |>
+              data2_tmp <- d2 |>
                 mutate(x = cut(x, breaks = breaks, include.lowest = TRUE)) |>
                 group_by(x) |>
                 summarise(y = mean(y)) |>
