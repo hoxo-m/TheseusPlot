@@ -80,7 +80,7 @@
 <p>To address this issue, we propose an approach inspired by the story of the <em><a href="https://en.wikipedia.org/wiki/Ship_of_Theseus" class="external-link">Ship of Theseus</a></em>. This approach involves gradually replacing the components of one group with those of another, recalculating the metric at each step. The change in the metric at each step can then be interpreted as the contribution of each subgroup to the overall difference.</p>
 <p>For instance, suppose the metric was 6.2% in 2024 and decreased to 5.2% in 2025. Again, we focus on gender. We replace the male data within the 2024 dataset with the male data from 2025 and recalculate the metric. As a result, the metric would drop by 0.8 percentage points, reaching 5.4%. In this case, the contribution of the male group to the change in the metric is -0.8 percentage points. Next, we replace the female data from 2024 with that from 2025. The dataset then consists entirely of 2025 data, and the metric drops by 0.2 percentage points, reaching 5.2%. Thus, the contribution of the female group is -0.2 percentage points.</p>
 <p>When visualized, the results appear as follows:</p>
-<p><img src="reference/figures/README-overview-1.png"><!-- --></p>
+<p><img src="reference/figures/README-overview-1.png" alt="" width="500"></p>
 <p>From this plot, we can see that the decline in the metric is primarily driven by the male group. We call this visualization the “Theseus Plot.”</p>
 <p>The <strong>TheseusPlot</strong> package is designed to make it easy to generate Theseus Plots for various attributes.</p>
 </div>
@@ -144,7 +144,7 @@
 <p>You can create a Theseus plot by passing column names to the <code>plot</code> method of a <code>ship</code> object. For example, to create a Theseus plot for the airport of origin:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ship</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span><span class="va">origin</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot_origin-1.png"><!-- --></p>
+<p><img src="reference/figures/README-plot_origin-1.png" alt="" width="500"></p>
 <p>New York City has three major airports, and Newark Liberty International Airport (EWR) accounted for the largest share of the decline in the on-time arrival rate.</p>
 <p>Note that the number of flights at each airport matters, as a larger flight volume is expected to have a greater impact. To make this clear, the Theseus plot displays the data size for each group within each subgroup as a bar chart. From this, we see that the number of flights is similar across airports, allowing for direct comparison of contributions.</p>
 <p>In summary, a Theseus plot consists of two components:</p>
@@ -168,11 +168,11 @@
 <p>When there are many subgroups, a Theseus plot can become hard to read. In such cases, you can swap the x- and y-axes for better visualization.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ship</span><span class="op">$</span><span class="fu">plot_flip</span><span class="op">(</span><span class="va">carrier</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot_carrier-1.png"><!-- --></p>
+<p><img src="reference/figures/README-plot_carrier-1.png" alt="" width="500"></p>
 <p>When the number of subgroups is large, those with small contributions are automatically grouped together. By default, this happens when there are more than 10 subgroups, but the threshold can be adjusted with the <code>n</code> argument.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ship</span><span class="op">$</span><span class="fu">plot_flip</span><span class="op">(</span><span class="va">carrier</span>, n <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-prot_carrier_n-1.png"><!-- --></p>
+<p><img src="reference/figures/README-prot_carrier_n-1.png" alt="" width="500"></p>
 <p>From this plot, JetBlue Airways and United Air Lines appear to have the largest contributions to the decline in on-time arrival rate.</p>
 </div>
 <div class="section level3">
@@ -181,11 +181,11 @@
 <p>Theseus plots do not directly support continuous variables. If a continuous column is provided, it is automatically discretized. For example, we can create a Theseus plot for departure delays.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ship</span><span class="op">$</span><span class="fu">plot_flip</span><span class="op">(</span><span class="va">dep_delay</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot_dep_delay-1.png"><!-- --></p>
+<p><img src="reference/figures/README-plot_dep_delay-1.png" alt="" width="500"></p>
 <p>By default, continuous variables are discretized so that each subgroup has roughly equal sample sizes, with the number of bins set to 10. You can modify these settings by passing the return value of <code><a href="reference/continuous_config.html">continuous_config()</a></code> to the <code>continuous</code> argument.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ship</span><span class="op">$</span><span class="fu">plot_flip</span><span class="op">(</span><span class="va">dep_delay</span>, continuous <span class="op">=</span> <span class="fu"><a href="reference/continuous_config.html">continuous_config</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot_dep_delay_n-1.png"><!-- --></p>
+<p><img src="reference/figures/README-plot_dep_delay_n-1.png" alt="" width="500"></p>
 <p>This result shows that both a decrease in on-time departures and an increase in delayed departures contributed to the decline in on-time arrival rate.</p>
 </div>
 </div>
