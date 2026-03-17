@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Theseus Plot: Visualizing Decomposition of Differences in Rate Metrics
+# TheseusPlot: Visualizing Decomposition of Differences in Rate Metrics
 
 <!-- badges: start -->
 

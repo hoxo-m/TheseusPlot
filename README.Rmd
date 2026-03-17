@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Theseus Plot: Visualizing Decomposition of Differences in Rate Metrics
+# TheseusPlot: Visualizing Decomposition of Differences in Rate Metrics
 
 <!-- badges: start -->
 [![CRAN-version](https://www.r-pkg.org/badges/version/TheseusPlot)](https://cran.r-project.org/package=TheseusPlot)
