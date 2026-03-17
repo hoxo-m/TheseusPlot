@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![CRAN-version](https://www.r-pkg.org/badges/version/TheseusPlot)](https://cran.r-project.org/package=TheseusPlot)
 [![CRAN-downloads](https://cranlogs.r-pkg.org/badges/TheseusPlot)](https://cran.r-project.org/package=TheseusPlot)
+[![R-CMD-check](https://github.com/hoxo-m/TheseusPlot/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/hoxo-m/TheseusPlot/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## 1. Overview
