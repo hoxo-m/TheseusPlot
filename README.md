@@ -41,7 +41,7 @@ Thus, the contribution of the female group is -0.2 percentage points.
 
 When visualized, the results appear as follows:
 
-![](man/figures/README-overview-1.png)<!-- -->
+<img src="man/figures/README-overview-1.png" alt="" width="500" />
 
 From this plot, we can see that the decline in the metric is primarily
 driven by the male group. We call this visualization the “Theseus Plot.”
@@ -136,7 +136,7 @@ airport of origin:
 ship$plot(origin)
 ```
 
-![](man/figures/README-plot_origin-1.png)<!-- -->
+<img src="man/figures/README-plot_origin-1.png" alt="" width="500" />
 
 New York City has three major airports, and Newark Liberty International
 Airport (EWR) accounted for the largest share of the decline in the
@@ -178,7 +178,7 @@ In such cases, you can swap the x- and y-axes for better visualization.
 ship$plot_flip(carrier)
 ```
 
-![](man/figures/README-plot_carrier-1.png)<!-- -->
+<img src="man/figures/README-plot_carrier-1.png" alt="" width="500" />
 
 When the number of subgroups is large, those with small contributions
 are automatically grouped together. By default, this happens when there
@@ -189,7 +189,7 @@ are more than 10 subgroups, but the threshold can be adjusted with the
 ship$plot_flip(carrier, n = 6)
 ```
 
-![](man/figures/README-prot_carrier_n-1.png)<!-- -->
+<img src="man/figures/README-prot_carrier_n-1.png" alt="" width="500" />
 
 From this plot, JetBlue Airways and United Air Lines appear to have the
 largest contributions to the decline in on-time arrival rate.
@@ -204,7 +204,7 @@ example, we can create a Theseus plot for departure delays.
 ship$plot_flip(dep_delay)
 ```
 
-![](man/figures/README-plot_dep_delay-1.png)<!-- -->
+<img src="man/figures/README-plot_dep_delay-1.png" alt="" width="500" />
 
 By default, continuous variables are discretized so that each subgroup
 has roughly equal sample sizes, with the number of bins set to 10. You
@@ -215,7 +215,7 @@ can modify these settings by passing the return value of
 ship$plot_flip(dep_delay, continuous = continuous_config(n = 3))
 ```
 
-![](man/figures/README-plot_dep_delay_n-1.png)<!-- -->
+<img src="man/figures/README-plot_dep_delay_n-1.png" alt="" width="500" />
 
 This result shows that both a decrease in on-time departures and an
 increase in delayed departures contributed to the decline in on-time
