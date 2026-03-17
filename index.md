@@ -1,4 +1,4 @@
-# Theseus Plot: Visualizing Decomposition of Differences in Rate Metrics
+# TheseusPlot: Visualizing Decomposition of Differences in Rate Metrics
 
 ## 1. Overview
 
