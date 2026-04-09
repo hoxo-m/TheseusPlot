@@ -364,7 +364,8 @@ ShipOfTheseus <- R6::R6Class(
       })
 
       if (is.null(main_item) & is.null(bar_max_value)) {
-        data_max <- result |> tail(-1) |> filter(abs(contrib) == max(abs(contrib)))
+        data_max <- result |> tail(-1) |> 
+          slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
         max_item <- data_max |> pull(items)
         max_amount <- data_max |> pull(contrib) |> abs()
         n_max <- data_size |> filter(items == max_item) |> pull(n) |> max()
@@ -468,7 +469,8 @@ ShipOfTheseus <- R6::R6Class(
       }
 
       if (is.null(main_item) & is.null(bar_max_value)) {
-        data_max <- result |> tail(-1) |> filter(abs(contrib) == max(abs(contrib)))
+        data_max <- result |> tail(-1) |> 
+          slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
         max_item <- data_max |> pull(items)
         max_amount <- data_max |> pull(contrib) |> abs()
         n_max <- data_size |> filter(items == max_item) |> pull(n) |> max()
