@@ -4,10 +4,11 @@ NULL
 #' An R6 Class for Generating Theseus Plot
 #'
 #' @description
-#' The `ShipOfTheseus` class decomposes the difference in outcome rates between
-#' two datasets and visualizes the results as a Theseus Plot. It provides methods
-#' to compute contributions of individual attributes, summarize results in tables,
-#' and generate waterfall-style plots for intuitive interpretation.
+#' The \code{ShipOfTheseus} class decomposes the difference in outcome rates
+#' between two datasets and visualizes the results as a Theseus Plot. It
+#' provides methods to compute contributions of individual attributes, summarize
+#' results in tables, and generate waterfall-style plots for intuitive
+#' interpretation.
 #'
 #' @import dplyr ggplot2 stringr
 #'
@@ -24,32 +25,44 @@ ShipOfTheseus <- R6::R6Class(
     compute_size = NULL,
     ylab = NULL,
     digits = NULL,
-    text_size = NULL
+    text_size = NULL,
+    
+    prepare_input_data = function(data, outcome) {
+      data |>
+        # Fill missing values while preserving column types, since downstream
+        # table()/plot() handle character and factor columns differently
+        mutate(
+          across(where(is.character), \(x) replace_na(x, "(Missing)")),
+          across(where(is.factor), \(x) fct_na_value_to_level(x, level = "(Missing)"))
+        ) |>
+        # Standardize the outcome column name for internal use
+        rename(.outcome = all_of(outcome))
+    }
   ),
 
   public = list(
     #' @description
-    #' The constructor of the ShipOfTheseus class.
+    #' The constructor of the \code{ShipOfTheseus} class.
     #'
-    #' @param data1 data frame representing the first group (e.g., the baseline or
-    #'   "original" data).
-    #' @param data2 data frame representing the second group (e.g., the comparison
-    #'   or "refitted" data).
-    #' @param outcome string specifying the outcome variable used to compute the rate
-    #'   metric (default is "y"). Typically, this is a binary indicator (e.g., 0/1)
-    #'   that is aggregated to form rates.
+    #' @param data1 data frame representing the first group (e.g., the baseline
+    #'   or "original" data).
+    #' @param data2 data frame representing the second group (e.g., the
+    #'   comparison or "refitted" data).
+    #' @param outcome string specifying the outcome variable used to compute the
+    #'   rate metric (default is \code{"y"}). Typically, this is a binary
+    #'   indicator (e.g., 0/1) that is aggregated to form rates.
     #' @param labels character vector of length 2 giving the labels for the two
-    #'   groups. The first corresponds to `data1`, the second to `data2`. Default is
-    #'   c("Original", "Refitted").
-    #' @param ylab string specifying the y-axis label for plots. If NULL (default),
-    #'   no label is displayed.
+    #'   groups. The first corresponds to \code{data1}, the second to
+    #'   \code{data2}. Default is \code{c("Original", "Refitted")}.
+    #' @param ylab string specifying the y-axis label for plots. If \code{NULL}
+    #'   (default), no label is displayed.
     #' @param digits integer indicating the number of decimal places to use for
-    #'   displaying numeric values (default is 3).
-    #' @param text_size numeric value specifying the relative size of text elements
-    #'   in plots (default is 1).
+    #'   displaying numeric values (default is \code{3}).
+    #' @param text_size numeric value specifying the relative size of text
+    #'   elements in plots (default is \code{1}).
     #'
-    #' @return A ShipOfTheseus object, which can be used with \code{plot()} to
-    #'   create Theseus plots.
+    #' @return A \code{ShipOfTheseus} object, which can be used with
+    #'   \code{plot()} to create Theseus plots.
     #'
     #' @importFrom forcats fct_na_value_to_level
     #' @importFrom memoise memoise
@@ -58,14 +71,8 @@ ShipOfTheseus <- R6::R6Class(
     initialize = function(data1, data2, outcome, labels, ylab, digits, text_size) {
       outcome <- rlang::quo_squash(outcome) |> rlang::as_string()
 
-      data1 <- data1 |>
-        mutate_if(is.character, ~ fct_na_value_to_level(.x, level = "(Missing)") |> as.character()) |>
-        mutate_if(is.factor, ~ fct_na_value_to_level(.x, level = "(Missing)")) |>
-        rename(.outcome = !!rlang::sym(outcome))
-      data2 <- data2 |>
-        mutate_if(is.character, ~ fct_na_value_to_level(.x, level = "(Missing)") |> as.character()) |>
-        mutate_if(is.factor, ~ fct_na_value_to_level(.x, level = "(Missing)")) |>
-        rename(.outcome = !!rlang::sym(outcome))
+      data1 <- private$prepare_input_data(data1, outcome)
+      data2 <- private$prepare_input_data(data2, outcome)
 
       private$labels <- labels
       private$ylab <- ylab

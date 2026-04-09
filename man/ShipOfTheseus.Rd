@@ -4,10 +4,11 @@
 \alias{ShipOfTheseus}
 \title{An R6 Class for Generating Theseus Plot}
 \description{
-The `ShipOfTheseus` class decomposes the difference in outcome rates between
-two datasets and visualizes the results as a Theseus Plot. It provides methods
-to compute contributions of individual attributes, summarize results in tables,
-and generate waterfall-style plots for intuitive interpretation.
+The \code{ShipOfTheseus} class decomposes the difference in outcome rates
+between two datasets and visualizes the results as a Theseus Plot. It
+provides methods to compute contributions of individual attributes, summarize
+results in tables, and generate waterfall-style plots for intuitive
+interpretation.
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -23,7 +24,7 @@ and generate waterfall-style plots for intuitive interpretation.
 \if{html}{\out{<a id="method-ShipOfTheseus-new"></a>}}
 \if{latex}{\out{\hypertarget{method-ShipOfTheseus-new}{}}}
 \subsection{Method \code{new()}}{
-The constructor of the ShipOfTheseus class.
+The constructor of the \code{ShipOfTheseus} class.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ShipOfTheseus$new(data1, data2, outcome, labels, ylab, digits, text_size)}\if{html}{\out{</div>}}
 }
@@ -31,34 +32,34 @@ The constructor of the ShipOfTheseus class.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{data1}}{data frame representing the first group (e.g., the baseline or
-"original" data).}
+\item{\code{data1}}{data frame representing the first group (e.g., the baseline
+or "original" data).}
 
-\item{\code{data2}}{data frame representing the second group (e.g., the comparison
-or "refitted" data).}
+\item{\code{data2}}{data frame representing the second group (e.g., the
+comparison or "refitted" data).}
 
-\item{\code{outcome}}{string specifying the outcome variable used to compute the rate
-metric (default is "y"). Typically, this is a binary indicator (e.g., 0/1)
-that is aggregated to form rates.}
+\item{\code{outcome}}{string specifying the outcome variable used to compute the
+rate metric (default is \code{"y"}). Typically, this is a binary
+indicator (e.g., 0/1) that is aggregated to form rates.}
 
 \item{\code{labels}}{character vector of length 2 giving the labels for the two
-groups. The first corresponds to `data1`, the second to `data2`. Default is
-c("Original", "Refitted").}
+groups. The first corresponds to \code{data1}, the second to
+\code{data2}. Default is \code{c("Original", "Refitted")}.}
 
-\item{\code{ylab}}{string specifying the y-axis label for plots. If NULL (default),
-no label is displayed.}
+\item{\code{ylab}}{string specifying the y-axis label for plots. If \code{NULL}
+(default), no label is displayed.}
 
 \item{\code{digits}}{integer indicating the number of decimal places to use for
-displaying numeric values (default is 3).}
+displaying numeric values (default is \code{3}).}
 
-\item{\code{text_size}}{numeric value specifying the relative size of text elements
-in plots (default is 1).}
+\item{\code{text_size}}{numeric value specifying the relative size of text
+elements in plots (default is \code{1}).}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A ShipOfTheseus object, which can be used with \code{plot()} to
-  create Theseus plots.
+A \code{ShipOfTheseus} object, which can be used with
+  \code{plot()} to create Theseus plots.
 }
 }
 \if{html}{\out{<hr>}}
