@@ -51,7 +51,16 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="theseusplot-development-version">TheseusPlot (development version)<a class="anchor" aria-label="anchor" href="#theseusplot-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="theseusplot-020">TheseusPlot 0.2.0<a class="anchor" aria-label="anchor" href="#theseusplot-020"></a></h2>
+<div class="section level3">
+<h3 id="bug-fixes-0-2-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-2-0"></a></h3>
+<ul><li>Fixed a bug in continuous-variable discretization with <code>split = "rate"</code> where bin boundaries for the second group were incorrectly computed using the first group’s data. (<a href="https://github.com/hoxo-m/TheseusPlot/issues/6" class="external-link">#6</a>, thanks 1)</li>
+<li>Fixed a bug where the size bar for <code>"Sum of ... other attributes"</code> could incorrectly use the first group’s counts for both groups. (<a href="https://github.com/hoxo-m/TheseusPlot/issues/5" class="external-link">#5</a>, thanks
+<ol class="example" style="list-style-type: decimal"><li>
+</li></ol></li>
+<li>Fixed warnings in <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> and <code>plot_flip()</code> when multiple subgroups were tied for the largest absolute contribution.</li>
+<li>Suppressed spurious warnings generated internally by <code><a href="https://rdrr.io/pkg/waterfalls/man/waterfall.html" class="external-link">waterfalls::waterfall()</a></code> during plot creation.</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="theseusplot-011">TheseusPlot 0.1.1<a class="anchor" aria-label="anchor" href="#theseusplot-011"></a></h2><p class="text-muted">CRAN release: 2025-08-28</p>
