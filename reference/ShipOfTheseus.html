@@ -5,13 +5,15 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="An R6 Class for Generating Theseus Plot — ShipOfTheseus"><meta name="description" content="The `ShipOfTheseus` class decomposes the difference in outcome rates between
-two datasets and visualizes the results as a Theseus Plot. It provides methods
-to compute contributions of individual attributes, summarize results in tables,
-and generate waterfall-style plots for intuitive interpretation."><meta property="og:description" content="The `ShipOfTheseus` class decomposes the difference in outcome rates between
-two datasets and visualizes the results as a Theseus Plot. It provides methods
-to compute contributions of individual attributes, summarize results in tables,
-and generate waterfall-style plots for intuitive interpretation."></head><body>
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="An R6 Class for Generating Theseus Plot — ShipOfTheseus"><meta name="description" content="The ShipOfTheseus class decomposes the difference in outcome rates
+between two datasets and visualizes the results as a Theseus Plot. It
+provides methods to compute contributions of individual attributes, summarize
+results in tables, and generate waterfall-style plots for intuitive
+interpretation."><meta property="og:description" content="The ShipOfTheseus class decomposes the difference in outcome rates
+between two datasets and visualizes the results as a Theseus Plot. It
+provides methods to compute contributions of individual attributes, summarize
+results in tables, and generate waterfall-style plots for intuitive
+interpretation."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -58,10 +60,11 @@ and generate waterfall-style plots for intuitive interpretation."></head><body>
     </div>
 
     <div class="ref-description section level2">
-    <p>The `ShipOfTheseus` class decomposes the difference in outcome rates between
-two datasets and visualizes the results as a Theseus Plot. It provides methods
-to compute contributions of individual attributes, summarize results in tables,
-and generate waterfall-style plots for intuitive interpretation.</p>
+    <p>The <code>ShipOfTheseus</code> class decomposes the difference in outcome rates
+between two datasets and visualizes the results as a Theseus Plot. It
+provides methods to compute contributions of individual attributes, summarize
+results in tables, and generate waterfall-style plots for intuitive
+interpretation.</p>
     </div>
 
 
@@ -78,7 +81,7 @@ and generate waterfall-style plots for intuitive interpretation.</p>
 <li><p><a href="#method-ShipOfTheseus-clone"><code>ShipOfTheseus$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-ShipOfTheseus-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
-<p>The constructor of the ShipOfTheseus class.</p><div class="section">
+<p>The constructor of the <code>ShipOfTheseus</code> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ShipOfTheseus.html">ShipOfTheseus</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">data1</span>, <span class="va">data2</span>, <span class="va">outcome</span>, <span class="va">labels</span>, <span class="va">ylab</span>, <span class="va">digits</span>, <span class="va">text_size</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -86,48 +89,48 @@ and generate waterfall-style plots for intuitive interpretation.</p>
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>data1</code></dt>
-<dd><p>data frame representing the first group (e.g., the baseline or
-"original" data).</p></dd>
+<dd><p>data frame representing the first group (e.g., the baseline
+or "original" data).</p></dd>
 
 
 <dt><code>data2</code></dt>
-<dd><p>data frame representing the second group (e.g., the comparison
-or "refitted" data).</p></dd>
+<dd><p>data frame representing the second group (e.g., the
+comparison or "refitted" data).</p></dd>
 
 
 <dt><code>outcome</code></dt>
-<dd><p>string specifying the outcome variable used to compute the rate
-metric (default is "y"). Typically, this is a binary indicator (e.g., 0/1)
-that is aggregated to form rates.</p></dd>
+<dd><p>string specifying the outcome variable used to compute the
+rate metric (default is <code>"y"</code>). Typically, this is a binary
+indicator (e.g., 0/1) that is aggregated to form rates.</p></dd>
 
 
 <dt><code>labels</code></dt>
 <dd><p>character vector of length 2 giving the labels for the two
-groups. The first corresponds to `data1`, the second to `data2`. Default is
-c("Original", "Refitted").</p></dd>
+groups. The first corresponds to <code>data1</code>, the second to
+<code>data2</code>. Default is <code>c("Original", "Refitted")</code>.</p></dd>
 
 
 <dt><code>ylab</code></dt>
-<dd><p>string specifying the y-axis label for plots. If NULL (default),
-no label is displayed.</p></dd>
+<dd><p>string specifying the y-axis label for plots. If <code>NULL</code>
+(default), no label is displayed.</p></dd>
 
 
 <dt><code>digits</code></dt>
 <dd><p>integer indicating the number of decimal places to use for
-displaying numeric values (default is 3).</p></dd>
+displaying numeric values (default is <code>3</code>).</p></dd>
 
 
 <dt><code>text_size</code></dt>
-<dd><p>numeric value specifying the relative size of text elements
-in plots (default is 1).</p></dd>
+<dd><p>numeric value specifying the relative size of text
+elements in plots (default is <code>1</code>).</p></dd>
 
 
 </dl><p></p></div>
 </div>
 <div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
-<p>A ShipOfTheseus object, which can be used with <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> to
-  create Theseus plots.</p>
+<p>A <code>ShipOfTheseus</code> object, which can be used with
+  <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> to create Theseus plots.</p>
 </div>
 
 </div><p></p><hr><a id="method-ShipOfTheseus-table"></a><div class="section">

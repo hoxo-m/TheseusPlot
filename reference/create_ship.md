@@ -100,6 +100,7 @@ create_ship(data1, data2, y = on_time)
 #>     compute_size: function (column_name, target, continuous) 
 #>     digits: 3
 #>     labels: Original Refitted
+#>     prepare_input_data: function (data, outcome) 
 #>     text_size: 1
 #>     to_factor: function (column_name, continuous) 
 #>     ylab: NULL

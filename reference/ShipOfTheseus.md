@@ -1,6 +1,6 @@
 # An R6 Class for Generating Theseus Plot
 
-The \`ShipOfTheseus\` class decomposes the difference in outcome rates
+The `ShipOfTheseus` class decomposes the difference in outcome rates
 between two datasets and visualizes the results as a Theseus Plot. It
 provides methods to compute contributions of individual attributes,
 summarize results in tables, and generate waterfall-style plots for
@@ -24,7 +24,7 @@ intuitive interpretation.
 
 ### Method `new()`
 
-The constructor of the ShipOfTheseus class.
+The constructor of the `ShipOfTheseus` class.
 
 #### Usage
 
@@ -45,33 +45,33 @@ The constructor of the ShipOfTheseus class.
 - `outcome`:
 
   string specifying the outcome variable used to compute the rate metric
-  (default is "y"). Typically, this is a binary indicator (e.g., 0/1)
+  (default is `"y"`). Typically, this is a binary indicator (e.g., 0/1)
   that is aggregated to form rates.
 
 - `labels`:
 
   character vector of length 2 giving the labels for the two groups. The
-  first corresponds to \`data1\`, the second to \`data2\`. Default is
-  c("Original", "Refitted").
+  first corresponds to `data1`, the second to `data2`. Default is
+  `c("Original", "Refitted")`.
 
 - `ylab`:
 
-  string specifying the y-axis label for plots. If NULL (default), no
+  string specifying the y-axis label for plots. If `NULL` (default), no
   label is displayed.
 
 - `digits`:
 
   integer indicating the number of decimal places to use for displaying
-  numeric values (default is 3).
+  numeric values (default is `3`).
 
 - `text_size`:
 
   numeric value specifying the relative size of text elements in plots
-  (default is 1).
+  (default is `1`).
 
 #### Returns
 
-A ShipOfTheseus object, which can be used with
+A `ShipOfTheseus` object, which can be used with
 [`plot()`](https://rdrr.io/r/graphics/plot.default.html) to create
 Theseus plots.
 
