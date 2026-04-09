@@ -220,3 +220,45 @@ ship$plot_flip(dep_delay, continuous = continuous_config(n = 3))
 This result shows that both a decrease in on-time departures and an
 increase in delayed departures contributed to the decline in on-time
 arrival rate.
+
+### 3.5 Ordering for Factor Columns
+
+If a subgroup column is a factor, `table()` and `plot()` respect its
+factor level order. This is useful when you want to keep a meaningful
+predefined order, such as `"Low"`, `"Medium"`, and `"High"`, instead of
+ordering categories by their contributions.
+
+``` r
+my_levels <- c("Low", "Medium", "High")
+
+data1 <- data.frame(
+  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = my_levels),
+  y = c(1, 1, 1, 0, 1, 1)
+)
+
+data2 <- data.frame(
+  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = my_levels),
+  y = c(1, 0, 1, 1, 0, 0)
+)
+
+ship <- create_ship(data1, data2, y = y, labels = c("Group 1", "Group 2"))
+
+ship$table(segment)
+#> # A tibble: 3 × 8
+#>   segment contrib    n1    n2    x1    x2 rate1 rate2
+#>   <fct>     <dbl> <int> <int> <dbl> <dbl> <dbl> <dbl>
+#> 1 Low      -0.167     2     2     2     1   1     0.5
+#> 2 Medium    0.167     2     2     1     2   0.5   1  
+#> 3 High     -0.333     2     2     2     0   1     0
+
+ship$plot(segment)
+```
+
+<img src="man/figures/README-factor_column-1.png" alt="" width="500" />
+
+Even if the contribution of `"High"` is larger than that of `"Low"` or
+`"Medium"`, the rows and bars are shown in the order
+`"Low" -> "Medium" -> "High"` because `segment` is a factor.
+
+By contrast, if `segment` were a character column, the output would be
+ordered by contribution rather than by a predefined level order.
