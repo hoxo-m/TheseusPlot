@@ -5,6 +5,8 @@
 - **[Koji Makiyama](https://hoxo-m.github.io/blog/)**. Author,
   maintainer, copyright holder.
 
+- **Kazuyuki Sano**. Contributor, woodcutter.
+
 - **Shinichi Takayanagi**. Medium.
 
 - **Daisuke Ichikawa**. Expert.
