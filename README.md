@@ -229,15 +229,15 @@ predefined order, such as `"Low"`, `"Medium"`, and `"High"`, instead of
 ordering categories by their contributions.
 
 ``` r
-my_levels <- c("Low", "Medium", "High")
+segment_order <- c("Low", "Medium", "High")
 
 data1 <- data.frame(
-  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = my_levels),
+  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = segment_order),
   y = c(1, 1, 1, 0, 1, 1)
 )
 
 data2 <- data.frame(
-  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = my_levels),
+  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = segment_order),
   y = c(1, 0, 1, 1, 0, 0)
 )
 

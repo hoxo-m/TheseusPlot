@@ -27,6 +27,8 @@ ShipOfTheseus <- R6::R6Class(
     digits = NULL,
     text_size = NULL,
     
+    #' @importFrom forcats fct_na_value_to_level
+    #' @importFrom tidyr replace_na
     prepare_input_data = function(data, outcome) {
       data |>
         # Fill missing values while preserving column types, since downstream
@@ -64,7 +66,7 @@ ShipOfTheseus <- R6::R6Class(
     #' @return A \code{ShipOfTheseus} object, which can be used with
     #'   \code{plot()} to create Theseus plots.
     #'
-    #' @importFrom forcats fct_na_value_to_level
+    #' @importFrom forcats fct_c fct_na_value_to_level
     #' @importFrom memoise memoise
     #' @importFrom tibble tibble
     #' @importFrom tidyr replace_na
@@ -79,13 +81,13 @@ ShipOfTheseus <- R6::R6Class(
       private$digits <- digits
       private$text_size <- text_size
 
-      private$compute_scores <- memoise::memoise(function(column_name) {
+      private$compute_scores <- memoise(function(column_name) {
         score1 <- data1 |> summarise(score = mean(.outcome)) |> pull(score)
         score2 <- data2 |> summarise(score = mean(.outcome)) |> pull(score)
         c(score1, score2)
       })
 
-      private$to_factor <- memoise::memoise(function(column_name, continuous) {
+      private$to_factor <- memoise(function(column_name, continuous) {
         if (is.null(continuous$breaks)) {
           values <- c(data1[[column_name]], data2[[column_name]])
           break_num <- continuous$n
@@ -144,7 +146,7 @@ ShipOfTheseus <- R6::R6Class(
         list(df1, df2)
       })
 
-      private$compute_contribution <- memoise::memoise(function(column_name, continuous) {
+      private$compute_contribution <- memoise(function(column_name, continuous) {
         if (is.numeric(data1[[column_name]])) {
           data_list <- private$to_factor(column_name, continuous)
           data1 <- data_list[[1]]
@@ -165,7 +167,7 @@ ShipOfTheseus <- R6::R6Class(
         score1 <- scores[1]
         score2 <- scores[2]
 
-        result <- tibble::tibble()
+        result <- tibble()
         for (name in names2) {
           df_temp <- df1
           if (name %in% names1) {
@@ -176,7 +178,7 @@ ShipOfTheseus <- R6::R6Class(
 
           score_new <- df_temp |> summarise(score = sum(y) / sum(n)) |> pull(score)
           diff <- score_new - score1
-          res <- tibble::tibble(items = name, amount = diff)
+          res <- tibble(items = name, amount = diff)
           result <- rbind(result, res)
         }
         for (name in names1) {
@@ -189,12 +191,12 @@ ShipOfTheseus <- R6::R6Class(
 
           score_new <- df_temp |> summarise(score = sum(y) / sum(n)) |> pull(score)
           diff <- score2 - score_new
-          res <- tibble::tibble(items = name, amount = diff)
+          res <- tibble(items = name, amount = diff)
           result <- rbind(result, res)
         }
 
         if (is.factor(names1)) {
-          names <- forcats::fct_c(names1, names2)
+          names <- fct_c(names1, names2)
           result <- result |>
             mutate(items = factor(items, levels = levels(names)))
         }
@@ -204,7 +206,7 @@ ShipOfTheseus <- R6::R6Class(
           mutate(contrib = (score2 - score1) * contrib / sum(contrib))
       })
 
-      private$compute_info <- memoise::memoise(function(column_name, continuous) {
+      private$compute_info <- memoise(function(column_name, continuous) {
         if (is.numeric(data1[[column_name]])) {
           data_list <- private$to_factor(column_name, continuous)
           data1 <- data_list[[1]]
@@ -219,10 +221,10 @@ ShipOfTheseus <- R6::R6Class(
           summarise(n2 = n(), x2 = sum(.outcome), rate2 = x2 / n2)
         data1_info |> full_join(data2_info, by = "items") |>
           select(items, starts_with("n"), starts_with("x"), starts_with("rate")) |>
-          tidyr::replace_na(list(n1 = 0L, n2 = 0L, x1 = 0L, x2 = 0L))
+          replace_na(list(n1 = 0L, n2 = 0L, x1 = 0L, x2 = 0L))
       })
 
-      private$compute_size <- memoise::memoise(function(column_name, target, continuous) {
+      private$compute_size <- memoise(function(column_name, target, continuous) {
         if (is.numeric(data1[[column_name]])) {
           data_list <- private$to_factor(column_name, continuous)
           data1 <- data_list[[1]]
