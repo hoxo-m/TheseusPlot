@@ -16,7 +16,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/hoxo-m/TheseusPlot/blob/main/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/hoxo-m/TheseusPlot/blob/v0.2.0/DESCRIPTION)
 
 Makiyama K (2026). *TheseusPlot: Visualizing Decomposition of
 Differences in Rate Metrics*. R package version 0.2.0,
