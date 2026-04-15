@@ -2,6 +2,8 @@
 
 ## TheseusPlot 0.2.0
 
+CRAN release: 2026-04-09
+
 ### Bug fixes
 
 - Fixed a bug in continuous-variable discretization with

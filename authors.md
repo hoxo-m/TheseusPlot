@@ -19,13 +19,13 @@ Source:
 [`DESCRIPTION`](https://github.com/hoxo-m/TheseusPlot/blob/main/DESCRIPTION)
 
 Makiyama K (2026). *TheseusPlot: Visualizing Decomposition of
-Differences in Rate Metrics*. R package version 0.1.1.9000,
+Differences in Rate Metrics*. R package version 0.2.0,
 <https://github.com/hoxo-m/TheseusPlot>.
 
     @Manual{,
       title = {TheseusPlot: Visualizing Decomposition of Differences in Rate Metrics},
       author = {Koji Makiyama},
       year = {2026},
-      note = {R package version 0.1.1.9000},
+      note = {R package version 0.2.0},
       url = {https://github.com/hoxo-m/TheseusPlot},
     }
