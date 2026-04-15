@@ -16,16 +16,16 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/hoxo-m/TheseusPlot/blob/v0.2.0/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/hoxo-m/TheseusPlot/blob/main/DESCRIPTION)
 
 Makiyama K (2026). *TheseusPlot: Visualizing Decomposition of
-Differences in Rate Metrics*. R package version 0.2.0,
+Differences in Rate Metrics*. R package version 0.2.0.9000,
 <https://github.com/hoxo-m/TheseusPlot>.
 
     @Manual{,
       title = {TheseusPlot: Visualizing Decomposition of Differences in Rate Metrics},
       author = {Koji Makiyama},
       year = {2026},
-      note = {R package version 0.2.0},
+      note = {R package version 0.2.0.9000},
       url = {https://github.com/hoxo-m/TheseusPlot},
     }

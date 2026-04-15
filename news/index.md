@@ -1,5 +1,7 @@
 # Changelog
 
+## TheseusPlot (development version)
+
 ## TheseusPlot 0.2.0
 
 CRAN release: 2026-04-09
