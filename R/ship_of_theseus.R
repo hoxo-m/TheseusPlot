@@ -359,12 +359,11 @@ ShipOfTheseus <- R6::R6Class(
         bind_rows(result)|>
         mutate(contrib = round(contrib * 100, digits = private$digits))
 
-      p <- suppressWarnings({
-        waterfalls::waterfall(
-          result, calc_total = TRUE, total_axis_text = labels[2],
-          total_rect_text_color = "black", total_rect_color = "#00BFC4", rect_text_size = private$text_size)
-      })
-
+      p <- waterfall(
+        result, calc_total = TRUE, total_axis_text = labels[2],
+        total_rect_text_color = "black", total_rect_color = "#00BFC4", 
+        rect_text_size = private$text_size)
+      
       if (is.null(main_item) & is.null(bar_max_value)) {
         data_max <- result |> tail(-1) |> 
           slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
@@ -446,7 +445,7 @@ ShipOfTheseus <- R6::R6Class(
 
       colors <- if_else(result$contrib > 0, "#F8766D", "#00BFC4")
       colors[1] <- "#00BFC4"
-      p <- waterfalls::waterfall(
+      p <- waterfall(
         result, calc_total = TRUE, total_axis_text = labels[1],
         total_rect_text_color = "black", fill_colours = colors,
         fill_by_sign = FALSE, total_rect_color = "#00BFC4",
