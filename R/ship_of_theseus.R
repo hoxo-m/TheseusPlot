@@ -395,7 +395,6 @@ ShipOfTheseus <- R6::R6Class(
       p + ggplot2::ggtitle(NULL, subtitle = column_name) +
         theme(private$text_size * 11) +
         ggplot2::xlab(NULL) + ggplot2::ylab(private$ylab)
-      p
     },
 
     #' @description
