@@ -45,6 +45,7 @@ You can install the **TheseusPlot** package from
 [CRAN](https://cran.r-project.org/package=TheseusPlot).
 
 ``` r
+
 install.packages("TheseusPlot")
 ```
 
@@ -52,6 +53,7 @@ You can install the development version from
 [GitHub](https://github.com/hoxo-m/TheseusPlot) with:
 
 ``` r
+
 remotes::install_github("hoxo-m/TheseusPlot")
 ```
 
@@ -76,6 +78,7 @@ groups. The on-time arrival rate was 64% in November and dropped to 47%
 in December.
 
 ``` r
+
 library(dplyr)
 library(nycflights13)
 
@@ -113,6 +116,7 @@ Using the two prepared data frames, we first create a `ship` object. The
 to create Theseus plots.
 
 ``` r
+
 library(TheseusPlot)
 
 ship <- create_ship(data_Nov, data_Dec, y = on_time, labels = c("November", "December"))
@@ -123,6 +127,7 @@ method of a `ship` object. For example, to create a Theseus plot for the
 airport of origin:
 
 ``` r
+
 ship$plot(origin)
 ```
 
@@ -150,6 +155,7 @@ A `ship` object also provides the `table` method to inspect the exact
 values used in the Theseus plot.
 
 ``` r
+
 ship$table(origin)
 #> # A tibble: 3 × 8
 #>   origin contrib    n1    n2    x1    x2 rate1 rate2
@@ -165,6 +171,7 @@ When there are many subgroups, a Theseus plot can become hard to read.
 In such cases, you can swap the x- and y-axes for better visualization.
 
 ``` r
+
 ship$plot_flip(carrier)
 ```
 
@@ -176,6 +183,7 @@ are more than 10 subgroups, but the threshold can be adjusted with the
 `n` argument.
 
 ``` r
+
 ship$plot_flip(carrier, n = 6)
 ```
 
@@ -191,6 +199,7 @@ continuous column is provided, it is automatically discretized. For
 example, we can create a Theseus plot for departure delays.
 
 ``` r
+
 ship$plot_flip(dep_delay)
 ```
 
@@ -203,6 +212,7 @@ can modify these settings by passing the return value of
 to the `continuous` argument.
 
 ``` r
+
 ship$plot_flip(dep_delay, continuous = continuous_config(n = 3))
 ```
 
@@ -222,6 +232,7 @@ predefined order, such as `"Low"`, `"Medium"`, and `"High"`, instead of
 ordering categories by their contributions.
 
 ``` r
+
 segment_order <- c("Low", "Medium", "High")
 
 data1 <- data.frame(

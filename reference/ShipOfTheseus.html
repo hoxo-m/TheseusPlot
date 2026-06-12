@@ -5,7 +5,7 @@
       fontURL: "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/output/chtml/fonts/woff-v2"
     }
   };
-</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="An R6 Class for Generating Theseus Plot — ShipOfTheseus"><meta name="description" content="The ShipOfTheseus class decomposes the difference in outcome rates
+</script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="An R6 Class for Generating Theseus Plot — ShipOfTheseus"><meta name="description" content="The ShipOfTheseus class decomposes the difference in outcome rates
 between two datasets and visualizes the results as a Theseus Plot. It
 provides methods to compute contributions of individual attributes, summarize
 results in tables, and generate waterfall-style plots for intuitive
@@ -74,100 +74,89 @@ interpretation.</p>
 
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
-
-<ul><li><p><a href="#method-ShipOfTheseus-new"><code>ShipOfTheseus$new()</code></a></p></li>
+<p></p><ul><li><p><a href="#method-ShipOfTheseus-initialize"><code>ShipOfTheseus$new()</code></a></p></li>
 <li><p><a href="#method-ShipOfTheseus-table"><code>ShipOfTheseus$table()</code></a></p></li>
 <li><p><a href="#method-ShipOfTheseus-plot"><code>ShipOfTheseus$plot()</code></a></p></li>
 <li><p><a href="#method-ShipOfTheseus-plot_flip"><code>ShipOfTheseus$plot_flip()</code></a></p></li>
 <li><p><a href="#method-ShipOfTheseus-clone"><code>ShipOfTheseus$clone()</code></a></p></li>
-</ul></div><p></p><hr><a id="method-ShipOfTheseus-new"></a><div class="section">
-<h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
+</ul></div><p></p><hr><a id="method-ShipOfTheseus-initialize"></a><div class="section">
+<h3 id="shipoftheseus-new-"><code>ShipOfTheseus$new()</code><a class="anchor" aria-label="anchor" href="#shipoftheseus-new-"></a></h3>
 <p>The constructor of the <code>ShipOfTheseus</code> class.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ShipOfTheseus.html">ShipOfTheseus</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">data1</span>, <span class="va">data2</span>, <span class="va">outcome</span>, <span class="va">labels</span>, <span class="va">ylab</span>, <span class="va">digits</span>, <span class="va">text_size</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>data1</code></dt>
 <dd><p>data frame representing the first group (e.g., the baseline
 or "original" data).</p></dd>
 
-
-<dt><code>data2</code></dt>
+      <dt><code>data2</code></dt>
 <dd><p>data frame representing the second group (e.g., the
 comparison or "refitted" data).</p></dd>
 
-
-<dt><code>outcome</code></dt>
+      <dt><code>outcome</code></dt>
 <dd><p>string specifying the outcome variable used to compute the
 rate metric (default is <code>"y"</code>). Typically, this is a binary
 indicator (e.g., 0/1) that is aggregated to form rates.</p></dd>
 
-
-<dt><code>labels</code></dt>
+      <dt><code>labels</code></dt>
 <dd><p>character vector of length 2 giving the labels for the two
 groups. The first corresponds to <code>data1</code>, the second to
 <code>data2</code>. Default is <code>c("Original", "Refitted")</code>.</p></dd>
 
-
-<dt><code>ylab</code></dt>
+      <dt><code>ylab</code></dt>
 <dd><p>string specifying the y-axis label for plots. If <code>NULL</code>
 (default), no label is displayed.</p></dd>
 
-
-<dt><code>digits</code></dt>
+      <dt><code>digits</code></dt>
 <dd><p>integer indicating the number of decimal places to use for
 displaying numeric values (default is <code>3</code>).</p></dd>
 
-
-<dt><code>text_size</code></dt>
+      <dt><code>text_size</code></dt>
 <dd><p>numeric value specifying the relative size of text
 elements in plots (default is <code>1</code>).</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns">Returns<a class="anchor" aria-label="anchor" href="#returns"></a></h4>
 <p>A <code>ShipOfTheseus</code> object, which can be used with
   <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> to create Theseus plots.</p>
 </div>
 
-</div><p></p><hr><a id="method-ShipOfTheseus-table"></a><div class="section">
-<h3 id="method-table-">Method <code><a href="https://rdrr.io/r/base/table.html" class="external-link">table()</a></code><a class="anchor" aria-label="anchor" href="#method-table-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ShipOfTheseus-table"></a><div class="section">
+<h3 id="shipoftheseus-table-"><code>ShipOfTheseus$table()</code><a class="anchor" aria-label="anchor" href="#shipoftheseus-table-"></a></h3>
 <p>Generate a contribution table for a given column.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ShipOfTheseus</span><span class="op">$</span><span class="fu">table</span><span class="op">(</span><span class="va">column_name</span>, n <span class="op">=</span> <span class="cn">Inf</span>, continuous <span class="op">=</span> <span class="fu"><a href="../reference/continuous_config.html">continuous_config</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column_name</code></dt>
 <dd><p>string. The name of the column to analyze.</p></dd>
 
-
-<dt><code>n</code></dt>
+      <dt><code>n</code></dt>
 <dd><p>integer. Maximum number of top contributing attributes to display.
 If the number of attributes exceeds `n`, the remaining are aggregated.</p></dd>
 
-
-<dt><code>continuous</code></dt>
+      <dt><code>continuous</code></dt>
 <dd><p>list. A configuration list for handling continuous
 variables (e.g., specifying number of bins or custom breaks).</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>A tibble summarizing each attribute's contribution to the
   difference between the two groups, including counts, total outcomes,
   and rates for each subgroup.</p>
 </div>
 
-</div><p></p><hr><a id="method-ShipOfTheseus-plot"></a><div class="section">
-<h3 id="method-plot-">Method <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code><a class="anchor" aria-label="anchor" href="#method-plot-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ShipOfTheseus-plot"></a><div class="section">
+<h3 id="shipoftheseus-plot-"><code>ShipOfTheseus$plot()</code><a class="anchor" aria-label="anchor" href="#shipoftheseus-plot-"></a></h3>
 <p>Generate a Theseus plot for a specified column</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ShipOfTheseus</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span></span>
@@ -178,46 +167,40 @@ variables (e.g., specifying number of bins or custom breaks).</p></dd>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="fu"><a href="../reference/continuous_config.html">continuous_config</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column_name</code></dt>
 <dd><p>The name of the column to visualize.</p></dd>
 
-
-<dt><code>n</code></dt>
+      <dt><code>n</code></dt>
 <dd><p>integer. Maximum number of top contributing attributes to display.
 Remaining attributes are aggregated if necessary.</p></dd>
 
-
-<dt><code>main_item</code></dt>
+      <dt><code>main_item</code></dt>
 <dd><p>string. The attribute used as the reference for scaling
 the bar heights.</p></dd>
 
-
-<dt><code>bar_max_value</code></dt>
+      <dt><code>bar_max_value</code></dt>
 <dd><p>numeric. Maximum value for scaling the contribution bars.</p></dd>
 
-
-<dt><code>levels</code></dt>
+      <dt><code>levels</code></dt>
 <dd><p>character vector specifying the display order of attributes.</p></dd>
 
-
-<dt><code>continuous</code></dt>
+      <dt><code>continuous</code></dt>
 <dd><p>list. Configuration for handling continuous variables
 (e.g., number of bins or custom breaks).</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
 <p>A ggplot object representing the Theseus Plot for the specified column.</p>
 </div>
 
-</div><p></p><hr><a id="method-ShipOfTheseus-plot_flip"></a><div class="section">
-<h3 id="method-plot-flip-">Method <code>plot_flip()</code><a class="anchor" aria-label="anchor" href="#method-plot-flip-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ShipOfTheseus-plot_flip"></a><div class="section">
+<h3 id="shipoftheseus-plot-flip-"><code>ShipOfTheseus$plot_flip()</code><a class="anchor" aria-label="anchor" href="#shipoftheseus-plot-flip-"></a></h3>
 <p>Generate a Theseus plot for a specified column</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ShipOfTheseus</span><span class="op">$</span><span class="fu">plot_flip</span><span class="op">(</span></span>
@@ -228,52 +211,44 @@ the bar heights.</p></dd>
 <span>  levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  continuous <span class="op">=</span> <span class="fu"><a href="../reference/continuous_config.html">continuous_config</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column_name</code></dt>
 <dd><p>The name of the column to visualize.</p></dd>
 
-
-<dt><code>n</code></dt>
+      <dt><code>n</code></dt>
 <dd><p>integer. Maximum number of top contributing attributes to display.
 Remaining attributes are aggregated if necessary.</p></dd>
 
-
-<dt><code>main_item</code></dt>
+      <dt><code>main_item</code></dt>
 <dd><p>string. The attribute used as the reference for scaling
 the bar heights.</p></dd>
 
-
-<dt><code>bar_max_value</code></dt>
+      <dt><code>bar_max_value</code></dt>
 <dd><p>numeric. Maximum value for scaling the contribution bars.</p></dd>
 
-
-<dt><code>levels</code></dt>
+      <dt><code>levels</code></dt>
 <dd><p>character vector specifying the display order of attributes.</p></dd>
 
-
-<dt><code>continuous</code></dt>
+      <dt><code>continuous</code></dt>
 <dd><p>list. Configuration for handling continuous variables
 (e.g., number of bins or custom breaks).</p></dd>
 
 
 </dl><p></p></div>
-</div>
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
 <p>A ggplot object representing the Theseus Plot for the specified column.</p>
 </div>
 
-</div><p></p><hr><a id="method-ShipOfTheseus-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+</div>
+
+<p></p><hr><a id="method-ShipOfTheseus-clone"></a><div class="section">
+<h3 id="shipoftheseus-clone-"><code>ShipOfTheseus$clone()</code><a class="anchor" aria-label="anchor" href="#shipoftheseus-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ShipOfTheseus</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
+</div><p></p><div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
@@ -283,6 +258,7 @@ the bar heights.</p></dd>
 </div>
 
 </div>
+
 
     </div>
 

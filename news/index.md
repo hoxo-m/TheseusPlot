@@ -2,6 +2,12 @@
 
 ## TheseusPlot (development version)
 
+### Bug fixes
+
+- Fixed missing subgroup size bars in
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) and
+  `plot_flip()` with **waterfalls** 1.1.4 and later.
+
 ## TheseusPlot 0.2.0
 
 CRAN release: 2026-04-09

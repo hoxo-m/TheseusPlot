@@ -10,7 +10,7 @@ intuitive interpretation.
 
 ### Public methods
 
-- [`ShipOfTheseus$new()`](#method-ShipOfTheseus-new)
+- [`ShipOfTheseus$new()`](#method-ShipOfTheseus-initialize)
 
 - [`ShipOfTheseus$table()`](#method-ShipOfTheseus-table)
 
@@ -22,7 +22,7 @@ intuitive interpretation.
 
 ------------------------------------------------------------------------
 
-### Method `new()`
+### `ShipOfTheseus$new()`
 
 The constructor of the `ShipOfTheseus` class.
 
@@ -77,7 +77,7 @@ Theseus plots.
 
 ------------------------------------------------------------------------
 
-### Method [`table()`](https://rdrr.io/r/base/table.html)
+### `ShipOfTheseus$table()`
 
 Generate a contribution table for a given column.
 
@@ -109,7 +109,7 @@ each subgroup.
 
 ------------------------------------------------------------------------
 
-### Method [`plot()`](https://rdrr.io/r/graphics/plot.default.html)
+### `ShipOfTheseus$plot()`
 
 Generate a Theseus plot for a specified column
 
@@ -159,7 +159,7 @@ A ggplot object representing the Theseus Plot for the specified column.
 
 ------------------------------------------------------------------------
 
-### Method `plot_flip()`
+### `ShipOfTheseus$plot_flip()`
 
 Generate a Theseus plot for a specified column
 
@@ -209,7 +209,7 @@ A ggplot object representing the Theseus Plot for the specified column.
 
 ------------------------------------------------------------------------
 
-### Method `clone()`
+### `ShipOfTheseus$clone()`
 
 The objects of this class are cloneable with this method.
 
