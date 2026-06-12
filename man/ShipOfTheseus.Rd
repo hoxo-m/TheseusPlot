@@ -12,179 +12,171 @@ interpretation.
 }
 \section{Methods}{
 \subsection{Public methods}{
-\itemize{
-\item \href{#method-ShipOfTheseus-new}{\code{ShipOfTheseus$new()}}
-\item \href{#method-ShipOfTheseus-table}{\code{ShipOfTheseus$table()}}
-\item \href{#method-ShipOfTheseus-plot}{\code{ShipOfTheseus$plot()}}
-\item \href{#method-ShipOfTheseus-plot_flip}{\code{ShipOfTheseus$plot_flip()}}
-\item \href{#method-ShipOfTheseus-clone}{\code{ShipOfTheseus$clone()}}
-}
+  \itemize{
+    \item \href{#method-ShipOfTheseus-initialize}{\code{ShipOfTheseus$new()}}
+    \item \href{#method-ShipOfTheseus-table}{\code{ShipOfTheseus$table()}}
+    \item \href{#method-ShipOfTheseus-plot}{\code{ShipOfTheseus$plot()}}
+    \item \href{#method-ShipOfTheseus-plot_flip}{\code{ShipOfTheseus$plot_flip()}}
+    \item \href{#method-ShipOfTheseus-clone}{\code{ShipOfTheseus$clone()}}
+  }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ShipOfTheseus-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ShipOfTheseus-new}{}}}
-\subsection{Method \code{new()}}{
-The constructor of the \code{ShipOfTheseus} class.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ShipOfTheseus$new(data1, data2, outcome, labels, ylab, digits, text_size)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{data1}}{data frame representing the first group (e.g., the baseline
+\if{html}{\out{<a id="method-ShipOfTheseus-initialize"></a>}}
+\if{latex}{\out{\hypertarget{method-ShipOfTheseus-initialize}{}}}
+\subsection{\code{ShipOfTheseus$new()}}{
+  The constructor of the \code{ShipOfTheseus} class.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ShipOfTheseus$new(data1, data2, outcome, labels, ylab, digits, text_size)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{data1}}{data frame representing the first group (e.g., the baseline
 or "original" data).}
-
-\item{\code{data2}}{data frame representing the second group (e.g., the
+      \item{\code{data2}}{data frame representing the second group (e.g., the
 comparison or "refitted" data).}
-
-\item{\code{outcome}}{string specifying the outcome variable used to compute the
+      \item{\code{outcome}}{string specifying the outcome variable used to compute the
 rate metric (default is \code{"y"}). Typically, this is a binary
 indicator (e.g., 0/1) that is aggregated to form rates.}
-
-\item{\code{labels}}{character vector of length 2 giving the labels for the two
+      \item{\code{labels}}{character vector of length 2 giving the labels for the two
 groups. The first corresponds to \code{data1}, the second to
 \code{data2}. Default is \code{c("Original", "Refitted")}.}
-
-\item{\code{ylab}}{string specifying the y-axis label for plots. If \code{NULL}
+      \item{\code{ylab}}{string specifying the y-axis label for plots. If \code{NULL}
 (default), no label is displayed.}
-
-\item{\code{digits}}{integer indicating the number of decimal places to use for
+      \item{\code{digits}}{integer indicating the number of decimal places to use for
 displaying numeric values (default is \code{3}).}
-
-\item{\code{text_size}}{numeric value specifying the relative size of text
+      \item{\code{text_size}}{numeric value specifying the relative size of text
 elements in plots (default is \code{1}).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{ShipOfTheseus} object, which can be used with
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{ShipOfTheseus} object, which can be used with
   \code{plot()} to create Theseus plots.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ShipOfTheseus-table"></a>}}
 \if{latex}{\out{\hypertarget{method-ShipOfTheseus-table}{}}}
-\subsection{Method \code{table()}}{
-Generate a contribution table for a given column.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ShipOfTheseus$table(column_name, n = Inf, continuous = continuous_config())}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{column_name}}{string. The name of the column to analyze.}
-
-\item{\code{n}}{integer. Maximum number of top contributing attributes to display.
+\subsection{\code{ShipOfTheseus$table()}}{
+  Generate a contribution table for a given column.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ShipOfTheseus$table(column_name, n = Inf, continuous = continuous_config())}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column_name}}{string. The name of the column to analyze.}
+      \item{\code{n}}{integer. Maximum number of top contributing attributes to display.
 If the number of attributes exceeds `n`, the remaining are aggregated.}
-
-\item{\code{continuous}}{list. A configuration list for handling continuous
+      \item{\code{continuous}}{list. A configuration list for handling continuous
 variables (e.g., specifying number of bins or custom breaks).}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A tibble summarizing each attribute's contribution to the
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A tibble summarizing each attribute's contribution to the
   difference between the two groups, including counts, total outcomes,
   and rates for each subgroup.
+  }
 }
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ShipOfTheseus-plot"></a>}}
 \if{latex}{\out{\hypertarget{method-ShipOfTheseus-plot}{}}}
-\subsection{Method \code{plot()}}{
-Generate a Theseus plot for a specified column
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ShipOfTheseus$plot(
+\subsection{\code{ShipOfTheseus$plot()}}{
+  Generate a Theseus plot for a specified column
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ShipOfTheseus$plot(
   column_name,
   n = 10L,
   main_item = NULL,
   bar_max_value = NULL,
   levels = NULL,
   continuous = continuous_config()
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{column_name}}{The name of the column to visualize.}
-
-\item{\code{n}}{integer. Maximum number of top contributing attributes to display.
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column_name}}{The name of the column to visualize.}
+      \item{\code{n}}{integer. Maximum number of top contributing attributes to display.
 Remaining attributes are aggregated if necessary.}
-
-\item{\code{main_item}}{string. The attribute used as the reference for scaling
+      \item{\code{main_item}}{string. The attribute used as the reference for scaling
 the bar heights.}
-
-\item{\code{bar_max_value}}{numeric. Maximum value for scaling the contribution bars.}
-
-\item{\code{levels}}{character vector specifying the display order of attributes.}
-
-\item{\code{continuous}}{list. Configuration for handling continuous variables
+      \item{\code{bar_max_value}}{numeric. Maximum value for scaling the contribution bars.}
+      \item{\code{levels}}{character vector specifying the display order of attributes.}
+      \item{\code{continuous}}{list. Configuration for handling continuous variables
 (e.g., number of bins or custom breaks).}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A ggplot object representing the Theseus Plot for the specified column.
+  }
 }
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A ggplot object representing the Theseus Plot for the specified column.
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ShipOfTheseus-plot_flip"></a>}}
 \if{latex}{\out{\hypertarget{method-ShipOfTheseus-plot_flip}{}}}
-\subsection{Method \code{plot_flip()}}{
-Generate a Theseus plot for a specified column
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ShipOfTheseus$plot_flip(
+\subsection{\code{ShipOfTheseus$plot_flip()}}{
+  Generate a Theseus plot for a specified column
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ShipOfTheseus$plot_flip(
   column_name,
   n = 10L,
   main_item = NULL,
   bar_max_value = NULL,
   levels = NULL,
   continuous = continuous_config()
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{column_name}}{The name of the column to visualize.}
-
-\item{\code{n}}{integer. Maximum number of top contributing attributes to display.
+)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column_name}}{The name of the column to visualize.}
+      \item{\code{n}}{integer. Maximum number of top contributing attributes to display.
 Remaining attributes are aggregated if necessary.}
-
-\item{\code{main_item}}{string. The attribute used as the reference for scaling
+      \item{\code{main_item}}{string. The attribute used as the reference for scaling
 the bar heights.}
-
-\item{\code{bar_max_value}}{numeric. Maximum value for scaling the contribution bars.}
-
-\item{\code{levels}}{character vector specifying the display order of attributes.}
-
-\item{\code{continuous}}{list. Configuration for handling continuous variables
+      \item{\code{bar_max_value}}{numeric. Maximum value for scaling the contribution bars.}
+      \item{\code{levels}}{character vector specifying the display order of attributes.}
+      \item{\code{continuous}}{list. Configuration for handling continuous variables
 (e.g., number of bins or custom breaks).}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A ggplot object representing the Theseus Plot for the specified column.
+  }
 }
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A ggplot object representing the Theseus Plot for the specified column.
-}
-}
+
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ShipOfTheseus-clone"></a>}}
 \if{latex}{\out{\hypertarget{method-ShipOfTheseus-clone}{}}}
-\subsection{Method \code{clone()}}{
-The objects of this class are cloneable with this method.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ShipOfTheseus$clone(deep = FALSE)}\if{html}{\out{</div>}}
+\subsection{\code{ShipOfTheseus$clone()}}{
+  The objects of this class are cloneable with this method.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{ShipOfTheseus$clone(deep = FALSE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{deep}}{Whether to make a deep clone.}
+    }
+    \if{html}{\out{</div>}}
+  }
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{deep}}{Whether to make a deep clone.}
-}
-\if{html}{\out{</div>}}
-}
-}
 }

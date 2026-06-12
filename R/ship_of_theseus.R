@@ -359,12 +359,11 @@ ShipOfTheseus <- R6::R6Class(
         bind_rows(result)|>
         mutate(contrib = round(contrib * 100, digits = private$digits))
 
-      p <- suppressWarnings({
-        waterfalls::waterfall(
-          result, calc_total = TRUE, total_axis_text = labels[2],
-          total_rect_text_color = "black", total_rect_color = "#00BFC4", rect_text_size = private$text_size)
-      })
-
+      p <- waterfall(
+        result, calc_total = TRUE, total_axis_text = labels[2],
+        total_rect_text_color = "black", total_rect_color = "#00BFC4", 
+        rect_text_size = private$text_size)
+      
       if (is.null(main_item) & is.null(bar_max_value)) {
         data_max <- result |> tail(-1) |> 
           slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
@@ -378,14 +377,15 @@ ShipOfTheseus <- R6::R6Class(
         max_amount <- bar_max_value
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
-
-      levels <- c(labels[1], names, labels[2])
-      data_size <- p$data |> select(x) |> distinct() |>
-        left_join(data_size, by = c(x = "items")) |>
+    
+      data_size <- tibble(x = c(1L, seq_along(names) + 1L, labels[2])) |>
+        arrange(x) |>
+        mutate(items = c(labels[1], names, labels[2])) |>
+        left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
-        mutate(x = factor(x, levels = levels), type = factor(type, levels = labels)) |>
+        mutate(type = factor(type, levels = labels)) |>
         mutate(n = n / n_max * max_amount)
-
+            
       p <- p +
         geom_col(data = data_size, aes(x, n, fill = type), width = 0.7, position = position_dodge()) +
         scale_fill_manual(values = c("#7CAE00", "#C77CFF"), guide = "none")
@@ -445,7 +445,7 @@ ShipOfTheseus <- R6::R6Class(
 
       colors <- if_else(result$contrib > 0, "#F8766D", "#00BFC4")
       colors[1] <- "#00BFC4"
-      p <- waterfalls::waterfall(
+      p <- waterfall(
         result, calc_total = TRUE, total_axis_text = labels[1],
         total_rect_text_color = "black", fill_colours = colors,
         fill_by_sign = FALSE, total_rect_color = "#00BFC4",
@@ -484,13 +484,14 @@ ShipOfTheseus <- R6::R6Class(
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
 
-      levels <- c(labels[2], names, labels[1])
-      data_size <- p$data |> select(x) |> distinct() |>
-        left_join(data_size, by = c(x = "items")) |>
+      data_size <- tibble(x = c(1L, seq_along(names) + 1L, labels[1])) |>
+        arrange(x) |>
+        mutate(items = c(labels[2], names, labels[1])) |>
+        left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
-        mutate(x = factor(x, levels = levels), type = factor(type, levels = rev(labels))) |>
+        mutate(type = factor(type, levels = rev(labels))) |>
         mutate(n = n / n_max * max_amount)
-
+      
       p <- p +
         geom_col(data = data_size, aes(x, n, fill = type), width = 0.7, position = position_dodge()) +
         scale_fill_manual(values = c("#C77CFF", "#7CAE00"), guide = "none")

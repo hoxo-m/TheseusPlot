@@ -35,12 +35,12 @@ Imports:
     stringr,
     tibble,
     tidyr,
-    waterfalls
+    waterfalls (>= 1.1.4)
 Suggests:
     knitr,
     nycflights13,
     rmarkdown,
     testthat (>= 3.0.0)
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

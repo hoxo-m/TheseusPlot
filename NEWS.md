@@ -1,5 +1,10 @@
 # TheseusPlot (development version)
 
+## Bug fixes
+
+* Fixed missing subgroup size bars in `plot()` and `plot_flip()` with
+  **waterfalls** 1.1.4 and later.
+  
 # TheseusPlot 0.2.0
 
 ## Bug fixes
