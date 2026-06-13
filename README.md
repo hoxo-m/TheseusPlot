@@ -82,7 +82,7 @@ using a Theseus plot.
 First, we create an `on_time` column in the data frame to indicate
 whether each flight arrived on time. Next, we extract the flights for
 November and December into separate data frames to form two comparison
-groups. The on-time arrival rate was 64% in November and dropped to 47%
+groups. The on-time arrival rate was 83% in November and dropped to 67%
 in December.
 
 ``` r
@@ -189,7 +189,7 @@ are more than 10 subgroups, but the threshold can be adjusted with the
 ship$plot_flip(carrier, n = 6)
 ```
 
-<img src="man/figures/README-prot_carrier_n-1.png" alt="" width="500" />
+<img src="man/figures/README-plot_carrier_n-1.png" alt="" width="500" />
 
 From this plot, JetBlue Airways and United Air Lines appear to have the
 largest contributions to the decline in on-time arrival rate.
@@ -221,15 +221,22 @@ This result shows that both a decrease in on-time departures and an
 increase in delayed departures contributed to the decline in on-time
 arrival rate.
 
-### 3.5 Ordering for Factor Columns
+### 3.5 Controlling Category Order with Factors
 
-If a subgroup column is a factor, `table()` and `plot()` respect its
-factor level order. This is useful when you want to keep a meaningful
-predefined order, such as `"Low"`, `"Medium"`, and `"High"`, instead of
-ordering categories by their contributions.
+By default, character columns are ordered by contribution size in
+`table()`, `plot()`, and `plot_flip()`. If you want to use a specific
+order instead, convert the column to a factor. For factor columns,
+TheseusPlot respects the order of the factor levels.
 
-For example, consider representing the same results not as a numerical
-range but as departure types: `"Early"`, `"On-time"`, and `"Delayed"`.
+This is useful when the categories have a natural order, such as
+`"Low"`, `"Medium"`, and `"High"`, or when you want to define the order
+manually.
+
+For example, suppose we classify departure delays into three categories:
+`"Early"`, `"On-time"`, and `"Delayed"`.
+
+When `departure_type` is a character column, the categories are ordered
+by their contributions.
 
 ``` r
 to_departure_type <- function(x) {
@@ -246,9 +253,8 @@ ship$plot_flip(departure_type)
 
 <img src="man/figures/README-no_factor_column-1.png" alt="" width="500" />
 
-When `departure_type` is of character type, plots or tables are sorted
-by contribution order. On the other hand, when it’s of factor type, they
-are sorted by the order of levels.
+To display the categories in a meaningful order, convert
+`departure_type` to a factor and specify the level order.
 
 ``` r
 to_departure_type <- function(x) {
@@ -267,5 +273,5 @@ ship$plot_flip(departure_type)
 
 <img src="man/figures/README-factor_column-1.png" alt="" width="500" />
 
-You can change the order of the factor levels to display them in any
-desired sequence.
+You can change the factor levels to display the categories in any order
+you choose.

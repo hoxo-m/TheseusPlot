@@ -100,7 +100,7 @@ We investigate the cause using a Theseus plot.
 
 First, we create an `on_time` column in the data frame to indicate whether each flight arrived on time.
 Next, we extract the flights for November and December into separate data frames to form two comparison groups.
-The on-time arrival rate was 64% in November and dropped to 47% in December.
+The on-time arrival rate was 83% in November and dropped to 67% in December.
 
 ```{r prepare_data}
 library(dplyr)
@@ -169,7 +169,7 @@ ship$plot_flip(carrier)
 When the number of subgroups is large, those with small contributions are automatically grouped together.
 By default, this happens when there are more than 10 subgroups, but the threshold can be adjusted with the `n` argument.
 
-```{r prot_carrier_n}
+```{r plot_carrier_n}
 ship$plot_flip(carrier, n = 6)
 ```
 
@@ -194,14 +194,21 @@ ship$plot_flip(dep_delay, continuous = continuous_config(n = 3))
 
 This result shows that both a decrease in on-time departures and an increase in delayed departures contributed to the decline in on-time arrival rate.
 
-### 3.5 Ordering for Factor Columns
+### 3.5 Controlling Category Order with Factors
 
-If a subgroup column is a factor, `table()` and `plot()` respect its factor
-level order. This is useful when you want to keep a meaningful predefined order,
-such as `"Low"`, `"Medium"`, and `"High"`, instead of ordering categories by
+By default, character columns are ordered by contribution size in `table()`,
+`plot()`, and `plot_flip()`. If you want to use a specific order instead,
+convert the column to a factor. For factor columns, TheseusPlot respects the
+order of the factor levels.
+
+This is useful when the categories have a natural order, such as `"Low"`,
+`"Medium"`, and `"High"`, or when you want to define the order manually.
+
+For example, suppose we classify departure delays into three categories:
+`"Early"`, `"On-time"`, and `"Delayed"`.
+
+When `departure_type` is a character column, the categories are ordered by
 their contributions.
-
-For example, consider representing the same results not as a numerical range but as departure types: `"Early"`, `"On-time"`, and `"Delayed"`.
 
 ```{r no_factor_column}
 to_departure_type <- function(x) {
@@ -216,8 +223,8 @@ ship <- create_ship(data_Nov, data_Dec, y = on_time, labels = c("November", "Dec
 ship$plot_flip(departure_type)
 ```
 
-When `departure_type` is of character type, plots or tables are sorted by contribution order.
-On the other hand, when it's of factor type, they are sorted by the order of levels.
+To display the categories in a meaningful order, convert `departure_type` to
+a factor and specify the level order.
 
 ```{r factor_column}
 to_departure_type <- function(x) {
@@ -234,4 +241,5 @@ ship <- create_ship(data_Nov, data_Dec, y = on_time, labels = c("November", "Dec
 ship$plot_flip(departure_type)
 ```
 
-You can change the order of the factor levels to display them in any desired sequence.
+You can change the factor levels to display the categories in any order you
+choose.
