@@ -72,6 +72,7 @@ ShipOfTheseus <- R6::R6Class(
     #' @importFrom tidyr replace_na
     initialize = function(data1, data2, outcome, labels, ylab, digits, text_size) {
       outcome <- rlang::quo_squash(outcome) |> rlang::as_string()
+      labels <- as.character(labels)
 
       data1 <- private$prepare_input_data(data1, outcome)
       data2 <- private$prepare_input_data(data2, outcome)
@@ -359,10 +360,14 @@ ShipOfTheseus <- R6::R6Class(
         bind_rows(result)|>
         mutate(contrib = round(contrib * 100, digits = private$digits))
 
+      n_bars <- nrow(result) + 1L
       p <- waterfall(
-        result, calc_total = TRUE, total_axis_text = labels[2],
+        values = result$contrib, labels = result$items,
+        calc_total = TRUE, total_axis_text = n_bars,
         total_rect_text_color = "black", total_rect_color = "#00BFC4", 
         rect_text_size = private$text_size)
+      scale_x <- p@scales$get_scales("x")
+      scale_x$labels <- c(result$items, labels[2])
       
       if (is.null(main_item) & is.null(bar_max_value)) {
         data_max <- result |> tail(-1) |> 
@@ -378,8 +383,7 @@ ShipOfTheseus <- R6::R6Class(
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
     
-      data_size <- tibble(x = c(1L, seq_along(names) + 1L, labels[2])) |>
-        arrange(x) |>
+      data_size <- tibble(x = as.character(seq_len(n_bars))) |>
         mutate(items = c(labels[1], names, labels[2])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
@@ -445,13 +449,17 @@ ShipOfTheseus <- R6::R6Class(
 
       colors <- if_else(result$contrib > 0, "#F8766D", "#00BFC4")
       colors[1] <- "#00BFC4"
+      n_bars <- nrow(result) + 1L
       p <- waterfall(
-        result, calc_total = TRUE, total_axis_text = labels[1],
+        values = result$contrib, labels = result$items,
+        calc_total = TRUE, total_axis_text = n_bars,
         total_rect_text_color = "black", fill_colours = colors,
         fill_by_sign = FALSE, total_rect_color = "#00BFC4",
         rect_text_size = private$text_size) +
         coord_flip()
-
+      scale_x <- p@scales$get_scales("x")
+      scale_x$labels <- c(result$items, labels[1])
+      
       reverse_sign <- function(x) {
         x <- str_replace(x, "\u2212", "-")
         x <- -as.numeric(x)
@@ -484,8 +492,7 @@ ShipOfTheseus <- R6::R6Class(
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
 
-      data_size <- tibble(x = c(1L, seq_along(names) + 1L, labels[1])) |>
-        arrange(x) |>
+      data_size <- tibble(x = as.character(seq_len(n_bars))) |>
         mutate(items = c(labels[2], names, labels[1])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
