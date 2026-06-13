@@ -35,7 +35,7 @@ ShipOfTheseus <- R6::R6Class(
         # table()/plot() handle character and factor columns differently
         mutate(
           across(where(is.character), \(x) replace_na(x, "(Missing)")),
-          across(where(is.factor), \(x) fct_na_value_to_level(x, level = "(Missing)"))
+          across(where(is.factor) & where(anyNA), \(x) fct_na_value_to_level(x, level = "(Missing)"))
         ) |>
         # Standardize the outcome column name for internal use
         rename(.outcome = all_of(outcome))
