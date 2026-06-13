@@ -201,29 +201,37 @@ level order. This is useful when you want to keep a meaningful predefined order,
 such as `"Low"`, `"Medium"`, and `"High"`, instead of ordering categories by
 their contributions.
 
-```{r factor_column}
-segment_order <- c("Low", "Medium", "High")
+For example, consider representing the same results not as a numerical range but as departure types: `"Early"`, `"On-time"`, and `"Delayed"`.
 
-data1 <- data.frame(
-  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = segment_order),
-  y = c(1, 1, 1, 0, 1, 1)
-)
+```{r no_factor_column}
+to_departure_type <- function(x) {
+  case_when(x <= -4 ~ "Early", x <= 4 ~ "On-time", x > 4 ~ "Delayed")
+}
 
-data2 <- data.frame(
-  segment = factor(c("Low", "Low", "Medium", "Medium", "High", "High"), levels = segment_order),
-  y = c(1, 0, 1, 1, 0, 0)
-)
+data_Nov <- data_Nov |> mutate(departure_type = to_departure_type(dep_delay))
+data_Dec <- data_Dec |> mutate(departure_type = to_departure_type(dep_delay))
 
-ship <- create_ship(data1, data2, y = y, labels = c("Group 1", "Group 2"))
+ship <- create_ship(data_Nov, data_Dec, y = on_time, labels = c("November", "December"))
 
-ship$table(segment)
-
-ship$plot(segment)
+ship$plot_flip(departure_type)
 ```
 
-Even if the contribution of `"High"` is larger than that of `"Low"` or
-`"Medium"`, the rows and bars are shown in the order
-`"Low" -> "Medium" -> "High"` because `segment` is a factor.
+When `departure_type` is of character type, plots or tables are sorted by contribution order.
+On the other hand, when it's of factor type, they are sorted by the order of levels.
 
-By contrast, if `segment` were a character column, the output would be ordered
-by contribution rather than by a predefined level order.
+```{r factor_column}
+to_departure_type <- function(x) {
+  types <- case_when(x <= -4 ~ "Early", x <= 4 ~ "On-time", x > 4 ~ "Delayed")
+  types <- factor(types, levels = c("Early", "On-time", "Delayed"))
+  types
+}
+
+data_Nov <- data_Nov |> mutate(departure_type = to_departure_type(dep_delay))
+data_Dec <- data_Dec |> mutate(departure_type = to_departure_type(dep_delay))
+
+ship <- create_ship(data_Nov, data_Dec, y = on_time, labels = c("November", "December"))
+
+ship$plot_flip(departure_type)
+```
+
+You can change the order of the factor levels to display them in any desired sequence.
