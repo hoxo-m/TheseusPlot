@@ -94,7 +94,7 @@ create_ship(data1, data2, y = on_time)
 #>     plot_flip: function (column_name, n = 10L, main_item = NULL, bar_max_value = NULL, 
 #>     table: function (column_name, n = Inf, continuous = continuous_config()) 
 #>   Private:
-#>     compute_bar_height: function (result, data_size, max_score, main_item = NULL, bar_max_value = NULL, 
+#>     compute_bar_height: function (data_waterfall, data_size, max_score, main_item = NULL, 
 #>     compute_contribution: function (column_name, continuous) 
 #>     compute_info: function (column_name, continuous) 
 #>     compute_scores: function (column_name) 
