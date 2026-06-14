@@ -12,7 +12,7 @@ knitr::opts_chunk$set(
   message = FALSE,
   dpi = 192,
   fig.width = 4,
-  fig.height = 3.2,
+  fig.height = 3,
   out.width = 500
 )
 ```

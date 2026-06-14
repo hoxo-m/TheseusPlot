@@ -22,6 +22,7 @@ ShipOfTheseus <- R6::R6Class(
     compute_contribution = NULL,
     compute_info = NULL,
     compute_size = NULL,
+    xlab = NULL,
     ylab = NULL,
     digits = NULL,
     text_size = NULL,
@@ -105,6 +106,8 @@ ShipOfTheseus <- R6::R6Class(
     #' @param labels character vector of length 2 giving the labels for the two
     #'   groups. The first corresponds to \code{data1}, the second to
     #'   \code{data2}. Default is \code{c("Baseline", "Comparison")}.
+    #' @param xlab string specifying the x-axis label for plots. If \code{NULL}
+    #'   (default), no label is displayed.
     #' @param ylab string specifying the y-axis label for plots. If \code{NULL}
     #'   (default), no label is displayed.
     #' @param digits integer indicating the number of decimal places to use for
@@ -119,7 +122,7 @@ ShipOfTheseus <- R6::R6Class(
     #' @importFrom memoise memoise
     #' @importFrom tibble tibble
     #' @importFrom tidyr replace_na
-    initialize = function(data1, data2, outcome, labels, ylab, digits, text_size) {
+    initialize = function(data1, data2, outcome, labels, xlab, ylab, digits, text_size) {
       outcome <- rlang::quo_squash(outcome) |> rlang::as_string()
       labels <- as.character(labels)
 
@@ -127,6 +130,7 @@ ShipOfTheseus <- R6::R6Class(
       data2 <- private$prepare_input_data(data2, outcome)
 
       private$labels <- labels
+      private$xlab <- xlab 
       private$ylab <- ylab
       private$digits <- digits
       private$text_size <- text_size
@@ -420,10 +424,10 @@ ShipOfTheseus <- R6::R6Class(
         geom_col(data = data_size, aes(x, n, fill = type), width = 0.7, position = position_dodge()) +
         scale_fill_manual(values = c("#7CAE00", "#C77CFF"), guide = "none")
       p$layers <- append(head(p$layers, -1), tail(p$layers, 1), 1)
-      theme <- ggplot2::theme_get()
-      p + ggplot2::ggtitle(NULL, subtitle = column_name) +
-        theme(private$text_size * 11) +
-        ggplot2::xlab(NULL) + ggplot2::ylab(private$ylab)
+      
+      current_theme <- ggplot2::theme_get()
+      current_theme$text <- element_text(size = 11 * private$text_size)
+      p + current_theme + xlab(private$xlab) + ylab(private$ylab)
     },
 
     #' @description
@@ -507,10 +511,10 @@ ShipOfTheseus <- R6::R6Class(
         geom_col(data = data_size, aes(x, n, fill = type), width = 0.7, position = position_dodge()) +
         scale_fill_manual(values = c("#C77CFF", "#7CAE00"), guide = "none")
       p$layers <- append(head(p$layers, -1), tail(p$layers, 1), 1)
-      theme <- ggplot2::theme_get()
-      p + ggplot2::ggtitle(NULL, subtitle = column_name) +
-        theme(private$text_size * 11) +
-        ggplot2::xlab(NULL) + ggplot2::ylab(private$ylab)
+      
+      current_theme <- ggplot2::theme_get()
+      current_theme$text <- element_text(size = 11 * private$text_size)
+      p + current_theme + xlab(private$xlab) + ylab(private$ylab)
     }
   )
 )

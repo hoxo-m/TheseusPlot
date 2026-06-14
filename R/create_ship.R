@@ -8,6 +8,8 @@
 #'   data).
 #' @param data2 data frame representing the second group (e.g., the comparison
 #'   data).
+#' @param xlab string specifying the x-axis label for plots. If \code{NULL}
+#'   (default), no label is displayed.
 #' @param y column name specifying the outcome variable used to compute the rate
 #'   metric (default is \code{"y"}). Typically, this is a binary indicator
 #'   (e.g., 0/1) that is aggregated to form rates.
@@ -39,7 +41,7 @@
 #'
 #' @export
 create_ship <- function(data1, data2, y = "y", labels = c("Baseline", "Comparison"),
-                        ylab = NULL, digits = 1L, text_size = 1.0) {
-  ShipOfTheseus$new(data1, data2, rlang::enquo(y), labels, ylab = ylab,
-                    digits = digits, text_size = text_size)
+                        xlab = NULL, ylab = NULL, digits = 1L, text_size = 1.0) {
+  ShipOfTheseus$new(data1, data2, rlang::enquo(y), labels, xlab = xlab, 
+                    ylab = ylab, digits = digits, text_size = text_size)
 }
