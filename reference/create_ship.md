@@ -11,6 +11,7 @@ create_ship(
   data2,
   y = "y",
   labels = c("Baseline", "Comparison"),
+  xlab = NULL,
   ylab = NULL,
   digits = 1L,
   text_size = 1
@@ -38,6 +39,11 @@ create_ship(
   character vector of length 2 giving the labels for the two groups. The
   first corresponds to `data1`, the second to `data2`. Default is
   `c("Baseline", "Comparison")`.
+
+- xlab:
+
+  string specifying the x-axis label for plots. If `NULL` (default), no
+  label is displayed.
 
 - ylab:
 
@@ -87,7 +93,7 @@ create_ship(data1, data2, y = on_time)
 #> <ShipOfTheseus>
 #>   Public:
 #>     clone: function (deep = FALSE) 
-#>     initialize: function (data1, data2, outcome, labels, ylab, digits, text_size) 
+#>     initialize: function (data1, data2, outcome, labels, xlab, ylab, digits, 
 #>     plot: function (column_name, n = 10L, main_item = NULL, bar_max_value = NULL, 
 #>     plot_flip: function (column_name, n = 10L, main_item = NULL, bar_max_value = NULL, 
 #>     table: function (column_name, n = Inf, continuous = continuous_config()) 
@@ -103,5 +109,6 @@ create_ship(data1, data2, y = on_time)
 #>     prepare_plot_data: function (column_name, n, levels, continuous, flip) 
 #>     text_size: 1
 #>     to_factor: function (column_name, continuous) 
+#>     xlab: NULL
 #>     ylab: NULL
 ```

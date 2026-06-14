@@ -27,7 +27,7 @@ The constructor of the `ShipOfTheseus` class.
 
 #### Usage
 
-    ShipOfTheseus$new(data1, data2, outcome, labels, ylab, digits, text_size)
+    ShipOfTheseus$new(data1, data2, outcome, labels, xlab, ylab, digits, text_size)
 
 #### Arguments
 
@@ -50,6 +50,11 @@ The constructor of the `ShipOfTheseus` class.
   character vector of length 2 giving the labels for the two groups. The
   first corresponds to `data1`, the second to `data2`. Default is
   `c("Baseline", "Comparison")`.
+
+- `xlab`:
+
+  string specifying the x-axis label for plots. If `NULL` (default), no
+  label is displayed.
 
 - `ylab`:
 
