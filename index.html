@@ -194,7 +194,7 @@
 </h3>
 <p>By default, character columns are ordered by contribution size in <code><a href="https://rdrr.io/r/base/table.html" class="external-link">table()</a></code>, <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>, and <code>plot_flip()</code>. If you want to use a specific order instead, convert the column to a factor. For factor columns, TheseusPlot respects the order of the factor levels.</p>
 <p>This is useful when the categories have a natural order, such as <code>"Low"</code>, <code>"Medium"</code>, and <code>"High"</code>, or when you want to define the order manually.</p>
-<p>For example, suppose we classify departure delays into three categories: <code>"Early"</code>, <code>"On time"</code>, and <code>"Delayed"</code>.</p>
+<p>For example, suppose we classify departure delays into three categories: <code>"Early"</code>, <code>"On-time"</code>, and <code>"Delayed"</code>.</p>
 <p>When <code>departure_type</code> is a character column, the categories are ordered by their contributions.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">to_departure_type</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>

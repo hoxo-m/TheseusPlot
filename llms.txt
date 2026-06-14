@@ -237,7 +237,7 @@ This is useful when the categories have a natural order, such as
 manually.
 
 For example, suppose we classify departure delays into three categories:
-`"Early"`, `"On time"`, and `"Delayed"`.
+`"Early"`, `"On-time"`, and `"Delayed"`.
 
 When `departure_type` is a character column, the categories are ordered
 by their contributions.
