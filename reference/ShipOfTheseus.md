@@ -102,9 +102,9 @@ Generate a contribution table for a given column.
 
 #### Returns
 
-A tibble summarizing each subgroups's contribution to the difference
-between the two groups, including counts, total outcomes, and rates for
-each subgroup.
+A tibble summarizing subgroup contributions to the difference between
+the two groups, including counts, total outcomes, and rates for each
+subgroup.
 
 ------------------------------------------------------------------------
 
@@ -145,7 +145,7 @@ Generate a Theseus plot for a specified column
 
 - `levels`:
 
-  character vector specifying the display order of subgroups
+  character vector specifying the display order of subgroups.
 
 - `continuous`:
 
