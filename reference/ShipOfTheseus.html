@@ -6,14 +6,12 @@
     }
   };
 </script><script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet"><link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet"><script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="An R6 Class for Generating Theseus Plot — ShipOfTheseus"><meta name="description" content="The ShipOfTheseus class decomposes the difference in outcome rates
-between two datasets and visualizes the results as a Theseus Plot. It
-provides methods to compute contributions of individual attributes, summarize
-results in tables, and generate waterfall-style plots for intuitive
-interpretation."><meta property="og:description" content="The ShipOfTheseus class decomposes the difference in outcome rates
-between two datasets and visualizes the results as a Theseus Plot. It
-provides methods to compute contributions of individual attributes, summarize
-results in tables, and generate waterfall-style plots for intuitive
-interpretation."></head><body>
+between two datasets. For a selected column, it computes subgroup
+contributions, summarizes the results in tables, and visualizes them as
+waterfall-style Theseus Plots."><meta property="og:description" content="The ShipOfTheseus class decomposes the difference in outcome rates
+between two datasets. For a selected column, it computes subgroup
+contributions, summarizes the results in tables, and visualizes them as
+waterfall-style Theseus Plots."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -62,10 +60,9 @@ interpretation."></head><body>
 
     <div class="ref-description section level2">
     <p>The <code>ShipOfTheseus</code> class decomposes the difference in outcome rates
-between two datasets and visualizes the results as a Theseus Plot. It
-provides methods to compute contributions of individual attributes, summarize
-results in tables, and generate waterfall-style plots for intuitive
-interpretation.</p>
+between two datasets. For a selected column, it computes subgroup
+contributions, summarizes the results in tables, and visualizes them as
+waterfall-style Theseus Plots.</p>
     </div>
 
 
@@ -137,8 +134,8 @@ elements in plots (default is <code>1</code>).</p></dd>
 <dd><p>string. The name of the column to analyze.</p></dd>
 
       <dt><code>n</code></dt>
-<dd><p>integer. Maximum number of top contributing attributes to display.
-If the number of attributes exceeds `n`, the remaining are aggregated.</p></dd>
+<dd><p>integer. Maximum number of top contributing subgroups to display.
+If the number of subgroups exceeds `n`, the remaining are aggregated.</p></dd>
 
       <dt><code>continuous</code></dt>
 <dd><p>list. A configuration list for handling continuous
@@ -148,7 +145,7 @@ variables (e.g., specifying number of bins or custom breaks).</p></dd>
 </dl><p></p></div>
 </div><p></p><div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>A tibble summarizing each attribute's contribution to the
+<p>A tibble summarizing each subgroups's contribution to the
   difference between the two groups, including counts, total outcomes,
   and rates for each subgroup.</p>
 </div>
@@ -173,18 +170,18 @@ variables (e.g., specifying number of bins or custom breaks).</p></dd>
 <dd><p>The name of the column to visualize.</p></dd>
 
       <dt><code>n</code></dt>
-<dd><p>integer. Maximum number of top contributing attributes to display.
-Remaining attributes are aggregated if necessary.</p></dd>
+<dd><p>integer. Maximum number of top contributing subgroups to display.
+Remaining subgroups are aggregated if necessary.</p></dd>
 
       <dt><code>main_item</code></dt>
-<dd><p>string. The attribute used as the reference for scaling
+<dd><p>string. The subgroup used as the reference for scaling
 the bar heights.</p></dd>
 
       <dt><code>bar_max_value</code></dt>
 <dd><p>numeric. Maximum value for scaling the contribution bars.</p></dd>
 
       <dt><code>levels</code></dt>
-<dd><p>character vector specifying the display order of attributes.</p></dd>
+<dd><p>character vector specifying the display order of subgroups</p></dd>
 
       <dt><code>continuous</code></dt>
 <dd><p>list. Configuration for handling continuous variables
@@ -217,18 +214,18 @@ the bar heights.</p></dd>
 <dd><p>The name of the column to visualize.</p></dd>
 
       <dt><code>n</code></dt>
-<dd><p>integer. Maximum number of top contributing attributes to display.
-Remaining attributes are aggregated if necessary.</p></dd>
+<dd><p>integer. Maximum number of top contributing subgroups to display.
+Remaining subgroups are aggregated if necessary.</p></dd>
 
       <dt><code>main_item</code></dt>
-<dd><p>string. The attribute used as the reference for scaling
+<dd><p>string. The subgroup used as the reference for scaling
 the bar heights.</p></dd>
 
       <dt><code>bar_max_value</code></dt>
 <dd><p>numeric. Maximum value for scaling the contribution bars.</p></dd>
 
       <dt><code>levels</code></dt>
-<dd><p>character vector specifying the display order of attributes.</p></dd>
+<dd><p>character vector specifying the display order of subgroups</p></dd>
 
       <dt><code>continuous</code></dt>
 <dd><p>list. Configuration for handling continuous variables

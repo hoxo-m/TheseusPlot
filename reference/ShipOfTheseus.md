@@ -1,10 +1,9 @@
 # An R6 Class for Generating Theseus Plot
 
 The `ShipOfTheseus` class decomposes the difference in outcome rates
-between two datasets and visualizes the results as a Theseus Plot. It
-provides methods to compute contributions of individual attributes,
-summarize results in tables, and generate waterfall-style plots for
-intuitive interpretation.
+between two datasets. For a selected column, it computes subgroup
+contributions, summarizes the results in tables, and visualizes them as
+waterfall-style Theseus Plots.
 
 ## Methods
 
@@ -93,8 +92,8 @@ Generate a contribution table for a given column.
 
 - `n`:
 
-  integer. Maximum number of top contributing attributes to display. If
-  the number of attributes exceeds \`n\`, the remaining are aggregated.
+  integer. Maximum number of top contributing subgroups to display. If
+  the number of subgroups exceeds \`n\`, the remaining are aggregated.
 
 - `continuous`:
 
@@ -103,7 +102,7 @@ Generate a contribution table for a given column.
 
 #### Returns
 
-A tibble summarizing each attribute's contribution to the difference
+A tibble summarizing each subgroups's contribution to the difference
 between the two groups, including counts, total outcomes, and rates for
 each subgroup.
 
@@ -132,12 +131,12 @@ Generate a Theseus plot for a specified column
 
 - `n`:
 
-  integer. Maximum number of top contributing attributes to display.
-  Remaining attributes are aggregated if necessary.
+  integer. Maximum number of top contributing subgroups to display.
+  Remaining subgroups are aggregated if necessary.
 
 - `main_item`:
 
-  string. The attribute used as the reference for scaling the bar
+  string. The subgroup used as the reference for scaling the bar
   heights.
 
 - `bar_max_value`:
@@ -146,7 +145,7 @@ Generate a Theseus plot for a specified column
 
 - `levels`:
 
-  character vector specifying the display order of attributes.
+  character vector specifying the display order of subgroups
 
 - `continuous`:
 
@@ -182,12 +181,12 @@ Generate a Theseus plot for a specified column
 
 - `n`:
 
-  integer. Maximum number of top contributing attributes to display.
-  Remaining attributes are aggregated if necessary.
+  integer. Maximum number of top contributing subgroups to display.
+  Remaining subgroups are aggregated if necessary.
 
 - `main_item`:
 
-  string. The attribute used as the reference for scaling the bar
+  string. The subgroup used as the reference for scaling the bar
   heights.
 
 - `bar_max_value`:
@@ -196,7 +195,7 @@ Generate a Theseus plot for a specified column
 
 - `levels`:
 
-  character vector specifying the display order of attributes.
+  character vector specifying the display order of subgroups
 
 - `continuous`:
 
