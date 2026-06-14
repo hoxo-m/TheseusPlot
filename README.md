@@ -12,15 +12,16 @@
 
 ## 1. Overview
 
-In data analysis, when a metric differs between two groups, we sometimes
+In data analysis, when a metric differs between two groups, we often
 want to investigate whether a particular subgroup is driving that
-difference. For example, when a key metric decline is detected compared
-to the previous year, you may want to conduct a more detailed analysis.
-In this analysis, you may focus on gender and examine whether the
-decline was driven by the male subgroup, the female subgroup, or both.
-However, this type of analysis is challenging when the metric is a rate,
-because the magnitude of each subgroup’s contribution to the rate cannot
-be simply calculated, unlike in the case of volume metrics.
+difference. For example, when you observe a decline in a key metric
+compared with the previous year, you may want to conduct a more detailed
+analysis. In such an analysis, you might focus on one attribute, such as
+gender, and examine whether the decline was driven by the male subgroup,
+the female subgroup, or both. However, this type of analysis is
+challenging when the metric is a rate, because each subgroup’s
+contribution to the rate difference cannot be simply calculated, unlike
+in the case of volume metrics.
 
 To address this issue, we propose an approach inspired by the story of
 the *[Ship of Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus)*.
@@ -70,7 +71,7 @@ remotes::install_github("hoxo-m/TheseusPlot")
 
 ### 3.1 Prepare Data
 
-To create Theseus plots, you need two data frames that share common
+To create Theseus Plots, you need two data frames that share common
 columns.
 
 We use the 2013 New York City flight data from
@@ -78,7 +79,7 @@ We use the 2013 New York City flight data from
 demo dataset. Here, we will define the rate metric as the proportion of
 flights that arrived on time. In December 2013, the on-time arrival rate
 dropped substantially compared to November. We investigate the cause
-using a Theseus plot.
+using a Theseus Plot.
 
 First, we create an `on_time` column in the data frame to indicate
 whether each flight arrived on time. Next, we extract the flights for
@@ -121,7 +122,7 @@ data_Dec |> summarise(on_time_rate = mean(on_time)) |> pull(on_time_rate)
 
 Using the two prepared data frames, we first create a `ship` object. The
 `ship` object is an instance of the R6 class `ShipOfTheseus`, designed
-to create Theseus plots.
+to create Theseus Plots.
 
 ``` r
 library(TheseusPlot)
@@ -129,8 +130,8 @@ library(TheseusPlot)
 ship <- create_ship(data_Nov, data_Dec, y = on_time, labels = c("November", "December"))
 ```
 
-You can create a Theseus plot by passing column names to the `plot`
-method of a `ship` object. For example, to create a Theseus plot for the
+You can create a Theseus Plot by passing column names to the `plot`
+method of a `ship` object. For example, to create a Theseus Plot for the
 airport of origin:
 
 ``` r
@@ -145,12 +146,12 @@ on-time arrival rate.
 
 Note that the number of flights at each airport matters, as a larger
 flight volume is expected to have a greater impact. To make this clear,
-the Theseus plot displays the data size for each group within each
+the Theseus Plot displays the sample size for each group within each
 subgroup as a bar chart. From this, we see that the number of flights is
 similar across airports, allowing for direct comparison of
 contributions.
 
-In summary, a Theseus plot consists of two components:
+In summary, a Theseus Plot consists of two components:
 
 - A waterfall plot showing how much each subgroup contributed to the
   change in the metric.
@@ -158,7 +159,7 @@ In summary, a Theseus plot consists of two components:
   subgroup.
 
 A `ship` object also provides the `table` method to inspect the exact
-values used in the Theseus plot.
+values used in the Theseus Plot.
 
 ``` r
 ship$table(origin)
@@ -172,7 +173,7 @@ ship$table(origin)
 
 ### 3.3 Flipping the Plot
 
-When there are many subgroups, a Theseus plot can become hard to read.
+When there are many subgroups, a Theseus Plot can become hard to read.
 In such cases, you can swap the x- and y-axes for better visualization.
 
 ``` r
@@ -197,9 +198,9 @@ largest contributions to the decline in on-time arrival rate.
 
 ### 3.4 Automatic Discretization of Continuous Values
 
-Theseus plots do not directly support continuous variables. If a
+Theseus Plots are primarily designed for categorical variables. When a
 continuous column is provided, it is automatically discretized. For
-example, we can create a Theseus plot for departure delays.
+example, we can create a Theseus Plot for departure delays.
 
 ``` r
 ship$plot_flip(dep_delay)
@@ -241,7 +242,7 @@ by their contributions.
 
 ``` r
 to_departure_type <- function(x) {
-  case_when(x <= -4 ~ "Early", x <= 4 ~ "On time", x > 4 ~ "Delayed")
+  case_when(x <= -4 ~ "Early", x <= 4 ~ "On-time", x > 4 ~ "Delayed")
 }
 
 data_Nov <- data_Nov |> mutate(departure_type = to_departure_type(dep_delay))
@@ -259,8 +260,8 @@ To display the categories in a meaningful order, convert
 
 ``` r
 to_departure_type <- function(x) {
-  types <- case_when(x <= -4 ~ "Early", x <= 4 ~ "On time", x > 4 ~ "Delayed")
-  types <- factor(types, levels = c("Early", "On time", "Delayed"))
+  types <- case_when(x <= -4 ~ "Early", x <= 4 ~ "On-time", x > 4 ~ "Delayed")
+  types <- factor(types, levels = c("Early", "On-time", "Delayed"))
   types
 }
 
