@@ -29,21 +29,21 @@ knitr::opts_chunk$set(
 
 In data analysis, when a metric differs between two groups, we often want to investigate whether a particular subgroup is driving that difference.
 For example, when you observe a decline in a key metric compared with the previous year, you may want to conduct a more detailed analysis.
-In such an analysis, you might focus on one attribute, such as gender, and examine whether the decline was driven by the male subgroup, the female subgroup, or both.
+In such an analysis, you might focus on one attribute, such as gender, and examine whether the decline was driven by the male users, the female users, or both.
 However, this type of analysis is challenging when the metric is a rate, because each subgroup’s contribution to the rate difference cannot be simply calculated, unlike in the case of volume metrics.
 
 To address this issue, we propose an approach inspired by the story of the *[Ship of Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus)*.
 This approach involves gradually replacing the components of one group with those of another, recalculating the metric at each step.
 The change in the metric at each step can then be interpreted as the contribution of each subgroup to the overall difference.
 
-For instance, suppose the metric was 6.2% in 2024 and decreased to 5.2% in 2025.
+For instance, suppose the click-through rate (CTR) was 6.2% in 2024 and decreased to 5.2% in 2025.
 Again, we focus on gender.
-We replace the male data within the 2024 dataset with the male data from 2025 and recalculate the metric.
-As a result, the metric would drop by 0.8 percentage points, reaching 5.4%.
-In this case, the contribution of the male subgroup to the change in the metric is -0.8 percentage points.
-Next, we replace the female data from 2024 with that from 2025.
-The dataset then consists entirely of 2025 data, and the metric drops by 0.2 percentage points, reaching 5.2%.
-Thus, the contribution of the female subgroup is -0.2 percentage points.
+We replace the male users in the 2024 dataset with the male users from 2025 and recalculate the CTR.
+As a result, the CTR would drop by 0.8 percentage points, reaching 5.4%.
+In this case, the contribution of male users to the change in CTR is -0.8 percentage points.
+Next, we replace the female users from 2024 with those from 2025.
+The dataset then consists entirely of 2025 data, and CTR drops by 0.2 percentage points, reaching 5.2%.
+Thus, the contribution of the female users is -0.2 percentage points.
 
 When visualized, the results appear as follows:
 
@@ -64,11 +64,11 @@ df1 <- data |> filter(month == 1L)
 df2 <- data |> filter(month == 7L)
 
 ship <- create_ship(df1, df2, y = y, labels = c("2024", "2025"), 
-                    ylab = "Rate Metric (%)", digits = 1L)
+                    ylab = "CTR (%)", digits = 1L)
 ship$plot(gender)
 ```
 
-From this plot, we can see that the decline in the metric is primarily driven by the male subgroup.
+From this plot, we can see that the decline in CTR is primarily driven by the male users.
 We call this visualization the “Theseus Plot.”
 
 The **TheseusPlot** package is designed to make it easy to generate Theseus Plots for any column that defines subgroups.
