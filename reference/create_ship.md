@@ -10,9 +10,9 @@ create_ship(
   data1,
   data2,
   y = "y",
-  labels = c("Original", "Refitted"),
+  labels = c("Baseline", "Comparison"),
   ylab = NULL,
-  digits = 3L,
+  digits = 1L,
   text_size = 1
 )
 ```
@@ -21,13 +21,11 @@ create_ship(
 
 - data1:
 
-  data frame representing the first group (e.g., the baseline or
-  "original" data).
+  data frame representing the first group (e.g., the baseline data).
 
 - data2:
 
-  data frame representing the second group (e.g., the comparison or
-  "refitted" data).
+  data frame representing the second group (e.g., the comparison data).
 
 - y:
 
@@ -39,7 +37,7 @@ create_ship(
 
   character vector of length 2 giving the labels for the two groups. The
   first corresponds to `data1`, the second to `data2`. Default is
-  `c("Original", "Refitted")`.
+  `c("Baseline", "Comparison")`.
 
 - ylab:
 
@@ -49,12 +47,12 @@ create_ship(
 - digits:
 
   integer indicating the number of decimal places to use for displaying
-  numeric values (default is 3).
+  numeric values (default is `1`).
 
 - text_size:
 
   numeric value specifying the relative size of text elements in plots
-  (default is 1.0).
+  (default is `1.0`).
 
 ## Value
 
@@ -99,8 +97,8 @@ create_ship(data1, data2, y = on_time)
 #>     compute_info: function (column_name, continuous) 
 #>     compute_scores: function (column_name) 
 #>     compute_size: function (column_name, target, continuous) 
-#>     digits: 3
-#>     labels: Original Refitted
+#>     digits: 1
+#>     labels: Baseline Comparison
 #>     prepare_input_data: function (data, outcome) 
 #>     prepare_plot_data: function (column_name, n, levels, continuous, flip) 
 #>     text_size: 1

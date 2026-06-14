@@ -33,13 +33,11 @@ The constructor of the `ShipOfTheseus` class.
 
 - `data1`:
 
-  data frame representing the first group (e.g., the baseline or
-  "original" data).
+  data frame representing the first group (e.g., the baseline data).
 
 - `data2`:
 
-  data frame representing the second group (e.g., the comparison or
-  "refitted" data).
+  data frame representing the second group (e.g., the comparison data).
 
 - `outcome`:
 
@@ -51,7 +49,7 @@ The constructor of the `ShipOfTheseus` class.
 
   character vector of length 2 giving the labels for the two groups. The
   first corresponds to `data1`, the second to `data2`. Default is
-  `c("Original", "Refitted")`.
+  `c("Baseline", "Comparison")`.
 
 - `ylab`:
 
@@ -61,12 +59,12 @@ The constructor of the `ShipOfTheseus` class.
 - `digits`:
 
   integer indicating the number of decimal places to use for displaying
-  numeric values (default is `3`).
+  numeric values (default is `1`).
 
 - `text_size`:
 
   numeric value specifying the relative size of text elements in plots
-  (default is `1`).
+  (default is `1.0`).
 
 #### Returns
 
