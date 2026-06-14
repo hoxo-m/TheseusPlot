@@ -404,7 +404,8 @@ ShipOfTheseus <- R6::R6Class(
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
     
-      data_size <- tibble(x = as.character(seq_len(n_bars))) |>
+      x_levels <- as.character(seq_len(n_bars))
+      data_size <- tibble(x = factor(x_levels, levels = x_levels)) |>
         mutate(items = c(labels[1], names, labels[2])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
@@ -500,7 +501,8 @@ ShipOfTheseus <- R6::R6Class(
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
 
-      data_size <- tibble(x = as.character(seq_len(n_bars))) |>
+      x_levels <- as.character(seq_len(n_bars))
+      data_size <- tibble(x = factor(x_levels, levels = x_levels)) |>
         mutate(items = c(labels[2], names, labels[1])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>

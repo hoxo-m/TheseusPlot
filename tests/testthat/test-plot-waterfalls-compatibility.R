@@ -36,6 +36,22 @@ get_size_bar_data <- function(plot) {
   plot$layers[[which(is_col_layer)]]$data
 }
 
+expect_size_bars_at_expected_positions <- function(plot, n_items) {
+  is_col_layer <- vapply(
+    plot$layers,
+    \(layer) inherits(layer$geom, "GeomCol"),
+    logical(1)
+  )
+  built_data <- ggplot2::ggplot_build(plot)$data[[which(is_col_layer)]]
+  expected_positions <- c(
+    1L,
+    rep(seq_len(n_items) + 1L, each = 2L),
+    n_items + 2L
+  )
+
+  expect_equal(round(as.numeric(built_data$x)), expected_positions)
+}
+
 expect_valid_size_bars <- function(size_bar_data, is_flip = FALSE) {
   actual <- size_bar_data |> select(-items)
   
@@ -130,26 +146,28 @@ test_that("plot() keeps size bars ordered with nine subgroups", {
   ship <- make_many_item_plot_test_ship()
   items <- paste0("item", seq_len(9L))
 
-  size_bar_data <- ship$plot(
+  plot <- ship$plot(
     group,
     levels = items,
     bar_max_value = 90
-  ) |>
-    get_size_bar_data()
+  )
+  size_bar_data <- get_size_bar_data(plot)
 
   expect_size_bars_in_item_order(size_bar_data)
+  expect_size_bars_at_expected_positions(plot, length(items))
 })
 
 test_that("plot_flip() keeps size bars ordered with nine subgroups", {
   ship <- make_many_item_plot_test_ship()
   items <- paste0("item", seq_len(9L))
 
-  size_bar_data <- ship$plot_flip(
+  plot <- ship$plot_flip(
     group,
     levels = items,
     bar_max_value = 90
-  ) |>
-    get_size_bar_data()
+  )
+  size_bar_data <- get_size_bar_data(plot)
 
   expect_size_bars_in_item_order(size_bar_data, is_flip = TRUE)
+  expect_size_bars_at_expected_positions(plot, length(items))
 })
