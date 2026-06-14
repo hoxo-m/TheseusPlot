@@ -41,47 +41,47 @@ ShipOfTheseus <- R6::R6Class(
     },
     
     prepare_plot_data = function(column_name, n, levels, continuous, flip) {
-      result <- self$table(!!rlang::sym(column_name), n = n, continuous = continuous) |>
+      df_contrib <- self$table(!!rlang::sym(column_name), n = n, continuous = continuous) |>
         select(items = 1L, contrib)
       
       if (flip) {
-        result <- result |> mutate(contrib = -contrib)
+        df_contrib <- df_contrib |> mutate(contrib = -contrib)
       }
       
-      is_factor <- is.factor(result$items)
+      is_factor <- is.factor(df_contrib$items)
       
       if (is_factor) {
-        result <- if (flip) arrange(result, desc(items)) else arrange(result, items)
+        df_contrib <- if (flip) arrange(df_contrib, desc(items)) else arrange(df_contrib, items)
       } else {
-        result <- arrange(result, contrib)
+        df_contrib <- arrange(df_contrib, contrib)
       }
       
       data_size <- private$compute_size(
         column_name,
-        target = result$items,
+        target = df_contrib$items,
         continuous = continuous
       )
       
       if (!is.null(levels)) {
         levels <- as.character(levels)
         if (flip) levels <- rev(levels)
-        result <- data.frame(items = levels) |> inner_join(result, by = "items")
+        df_contrib <- data.frame(items = levels) |> inner_join(df_contrib, by = "items")
       }
       
       list(
-        result = result,
+        df_contrib = df_contrib,
         data_size = data_size
       )
     },
     
-    compute_bar_height = function(result, data_size, max_score, main_item = NULL,
+    compute_bar_height = function(data_waterfall, data_size, max_score, main_item = NULL,
                                   bar_max_value = NULL, bar_min_ratio = 0.15) {
       if (is.null(main_item) & is.null(bar_max_value)) {
         max_amount <- max_score * 100 * bar_min_ratio
         n_max <- data_size |> tail(-1) |> 
           slice_max(order_by = n, n = 1, with_ties = FALSE) |> pull(n)
       } else if(!is.null(main_item)) {
-        max_amount <- result |> filter(items == main_item) |> pull(contrib) |> abs()
+        max_amount <- data_waterfall |> filter(items == main_item) |> pull(contrib) |> abs()
         n_max <- data_size |> filter(items == main_item) |> pull(n) |> max()
       } else if(!is.null(bar_max_value)) {
         max_amount <- bar_max_value
@@ -217,7 +217,7 @@ ShipOfTheseus <- R6::R6Class(
         score1 <- scores[1]
         score2 <- scores[2]
 
-        result <- tibble()
+        df_contrib <- tibble()
         for (name in names2) {
           df_temp <- df1
           if (name %in% names1) {
@@ -229,7 +229,7 @@ ShipOfTheseus <- R6::R6Class(
           score_new <- df_temp |> summarise(score = sum(y) / sum(n)) |> pull(score)
           diff <- score_new - score1
           res <- tibble(items = name, amount = diff)
-          result <- rbind(result, res)
+          df_contrib <- rbind(df_contrib, res)
         }
         for (name in names1) {
           df_temp <- df2
@@ -242,15 +242,15 @@ ShipOfTheseus <- R6::R6Class(
           score_new <- df_temp |> summarise(score = sum(y) / sum(n)) |> pull(score)
           diff <- score2 - score_new
           res <- tibble(items = name, amount = diff)
-          result <- rbind(result, res)
+          df_contrib <- rbind(df_contrib, res)
         }
 
         if (is.factor(names1)) {
           names <- fct_c(names1, names2)
-          result <- result |>
+          df_contrib <- df_contrib |>
             mutate(items = factor(items, levels = levels(names)))
         }
-        result |>
+        df_contrib |>
           group_by(items) |>
           summarise(contrib = mean(amount)) |>
           mutate(contrib = (score2 - score1) * contrib / sum(contrib))
@@ -312,7 +312,6 @@ ShipOfTheseus <- R6::R6Class(
           }
         }
       })
-
     },
 
     #' @description
@@ -390,24 +389,24 @@ ShipOfTheseus <- R6::R6Class(
       max_score <- max(scores)
       plot_data <- private$prepare_plot_data(column_name, n, levels, continuous, flip = FALSE)
       
-      result <- plot_data$result
+      df_contrib <- plot_data$df_contrib
       data_size <- plot_data$data_size
 
-      names <- as.character(result$items)
-      result <- tibble(items = labels[1], contrib = score1) |>
-        bind_rows(result)|>
+      names <- as.character(df_contrib$items)
+      data_waterfall <- tibble(items = labels[1], contrib = score1) |>
+        bind_rows(df_contrib)|>
         mutate(contrib = round(contrib * 100, digits = private$digits))
 
-      n_bars <- nrow(result) + 1L
+      n_bars <- nrow(data_waterfall) + 1L
       p <- waterfall(
-        values = result$contrib, labels = result$items,
+        data_waterfall,
         calc_total = TRUE, total_axis_text = n_bars,
         total_rect_text_color = "black", total_rect_color = "#00BFC4", 
         rect_text_size = private$text_size)
       scale_x <- p@scales$get_scales("x")
-      scale_x$labels <- c(result$items, labels[2])
+      scale_x$labels <- c(data_waterfall$items, labels[2])
       
-      bar_rate <- private$compute_bar_height(result, data_size, max_score, 
+      bar_rate <- private$compute_bar_height(data_waterfall, data_size, max_score, 
                                              main_item, bar_max_value)
 
       data_size <- tibble(x = factor(seq_len(n_bars))) |>
@@ -455,26 +454,26 @@ ShipOfTheseus <- R6::R6Class(
       max_score <- max(scores)
       plot_data <- private$prepare_plot_data(column_name, n, levels, continuous, flip = TRUE)
       
-      result <- plot_data$result
+      df_contrib <- plot_data$df_contrib
       data_size <- plot_data$data_size
       
-      names <- as.character(result$items)
-      result <- tibble::tibble(items = labels[2], contrib = score2) |>
-        bind_rows(result)|>
+      names <- as.character(df_contrib$items)
+      data_waterfall <- tibble::tibble(items = labels[2], contrib = score2) |>
+        bind_rows(df_contrib)|>
         mutate(contrib = round(contrib * 100, digits = private$digits))
 
-      colors <- if_else(result$contrib > 0, "#F8766D", "#00BFC4")
+      colors <- if_else(data_waterfall$contrib > 0, "#F8766D", "#00BFC4")
       colors[1] <- "#00BFC4"
-      n_bars <- nrow(result) + 1L
+      n_bars <- nrow(data_waterfall) + 1L
       p <- waterfall(
-        values = result$contrib, labels = result$items,
+        data_waterfall,
         calc_total = TRUE, total_axis_text = n_bars,
         total_rect_text_color = "black", fill_colours = colors,
         fill_by_sign = FALSE, total_rect_color = "#00BFC4",
         rect_text_size = private$text_size) +
         coord_flip()
       scale_x <- p@scales$get_scales("x")
-      scale_x$labels <- c(result$items, labels[1])
+      scale_x$labels <- c(data_waterfall$items, labels[1])
       
       reverse_sign <- function(x) {
         x <- str_replace(x, "\u2212", "-")
@@ -494,7 +493,7 @@ ShipOfTheseus <- R6::R6Class(
         }
       }
 
-      bar_rate <- private$compute_bar_height(result, data_size, max_score, 
+      bar_rate <- private$compute_bar_height(data_waterfall, data_size, max_score, 
                                              main_item, bar_max_value)
       
       data_size <- tibble(x = factor(seq_len(n_bars))) |>
