@@ -79,9 +79,9 @@ variables (e.g., specifying number of bins or custom breaks).}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A tibble summarizing each subgroups's contribution to the
-  difference between the two groups, including counts, total outcomes,
-  and rates for each subgroup.
+    A tibble summarizing subgroup contributions to the difference
+  between the two groups, including counts, total outcomes, and rates
+  for each subgroup.
   }
 }
 
@@ -111,7 +111,7 @@ Remaining subgroups are aggregated if necessary.}
       \item{\code{main_item}}{string. The subgroup used as the reference for scaling
 the bar heights.}
       \item{\code{bar_max_value}}{numeric. Maximum value for scaling the contribution bars.}
-      \item{\code{levels}}{character vector specifying the display order of subgroups}
+      \item{\code{levels}}{character vector specifying the display order of subgroups.}
       \item{\code{continuous}}{list. Configuration for handling continuous variables
 (e.g., number of bins or custom breaks).}
     }

@@ -33,21 +33,22 @@ For instance, suppose the metric was 6.2% in 2024 and decreased to 5.2%
 in 2025. Again, we focus on gender. We replace the male data within the
 2024 dataset with the male data from 2025 and recalculate the metric. As
 a result, the metric would drop by 0.8 percentage points, reaching 5.4%.
-In this case, the contribution of the male group to the change in the
+In this case, the contribution of the male subgroup to the change in the
 metric is -0.8 percentage points. Next, we replace the female data from
 2024 with that from 2025. The dataset then consists entirely of 2025
 data, and the metric drops by 0.2 percentage points, reaching 5.2%.
-Thus, the contribution of the female group is -0.2 percentage points.
+Thus, the contribution of the female subgroup is -0.2 percentage points.
 
 When visualized, the results appear as follows:
 
 <img src="man/figures/README-overview-1.png" alt="" width="500" />
 
 From this plot, we can see that the decline in the metric is primarily
-driven by the male group. We call this visualization the “Theseus Plot.”
+driven by the male subgroup. We call this visualization the “Theseus
+Plot.”
 
 The **TheseusPlot** package is designed to make it easy to generate
-Theseus Plots for different subgroup-defining columns.
+Theseus Plots for any column that defines subgroups.
 
 ## 2. Installation
 

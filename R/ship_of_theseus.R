@@ -324,9 +324,9 @@ ShipOfTheseus <- R6::R6Class(
     #' @param continuous list. A configuration list for handling continuous
     #'   variables (e.g., specifying number of bins or custom breaks).
     #'
-    #' @return A tibble summarizing each subgroups's contribution to the
-    #'   difference between the two groups, including counts, total outcomes,
-    #'   and rates for each subgroup.
+    #' @return A tibble summarizing subgroup contributions to the difference
+    #'   between the two groups, including counts, total outcomes, and rates
+    #'   for each subgroup.
     table = function(column_name, n = Inf, continuous = continuous_config()) {
       column_name <- rlang::ensym(column_name) |> rlang::as_string()
       data_contrib <- private$compute_contribution(column_name, continuous)
@@ -372,7 +372,7 @@ ShipOfTheseus <- R6::R6Class(
     #' @param main_item string. The subgroup used as the reference for scaling
     #'   the bar heights.
     #' @param bar_max_value numeric. Maximum value for scaling the contribution bars.
-    #' @param levels character vector specifying the display order of subgroups
+    #' @param levels character vector specifying the display order of subgroups.
     #' @param continuous list. Configuration for handling continuous variables
     #'   (e.g., number of bins or custom breaks).
     #'
