@@ -101,6 +101,7 @@ create_ship(data1, data2, y = on_time)
 #>     digits: 3
 #>     labels: Original Refitted
 #>     prepare_input_data: function (data, outcome) 
+#>     prepare_plot_data: function (column_name, n, levels, continuous, flip) 
 #>     text_size: 1
 #>     to_factor: function (column_name, continuous) 
 #>     ylab: NULL
