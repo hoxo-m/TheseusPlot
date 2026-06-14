@@ -73,6 +73,27 @@ ShipOfTheseus <- R6::R6Class(
         result = result,
         data_size = data_size
       )
+    },
+    
+    compute_bar_height = function(result, data_size, max_score, main_item = NULL,
+                                  bar_max_value = NULL, bar_min_ratio = 0.15) {
+      if (is.null(main_item) & is.null(bar_max_value)) {
+        # data_max <- result |> tail(-1) |>
+        #   slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
+        # max_item <- data_max |> pull(items)
+        # max_amount <- data_max |> pull(contrib) |> abs()
+        max_amount <- max_score * 100 * bar_min_ratio
+        # n_max <- data_size |> filter(items == max_item) |> pull(n) |> max()
+        n_max <- data_size |> tail(-1) |> 
+          slice_max(order_by = n, n = 1, with_ties = FALSE) |> pull(n)
+      } else if(!is.null(main_item)) {
+        max_amount <- result |> filter(items == main_item) |> pull(contrib) |> abs()
+        n_max <- data_size |> filter(items == main_item) |> pull(n) |> max()
+      } else if(!is.null(bar_max_value)) {
+        max_amount <- bar_max_value
+        n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
+      }
+      max_amount / n_max
     }
   ),
 
@@ -370,7 +391,9 @@ ShipOfTheseus <- R6::R6Class(
       column_name <- rlang::ensym(column_name) |> rlang::as_string()
 
       labels <- private$labels
-      score1 <- private$compute_scores(column_name)[1]
+      scores <- private$compute_scores(column_name)
+      score1 <- scores[1]
+      max_score <- max(scores)
       plot_data <- private$prepare_plot_data(column_name, n, levels, continuous, flip = FALSE)
       
       result <- plot_data$result
@@ -390,27 +413,15 @@ ShipOfTheseus <- R6::R6Class(
       scale_x <- p@scales$get_scales("x")
       scale_x$labels <- c(result$items, labels[2])
       
-      if (is.null(main_item) & is.null(bar_max_value)) {
-        data_max <- result |> tail(-1) |> 
-          slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
-        max_item <- data_max |> pull(items)
-        max_amount <- data_max |> pull(contrib) |> abs()
-        n_max <- data_size |> filter(items == max_item) |> pull(n) |> max()
-      } else if(!is.null(main_item)) {
-        max_amount <- result |> filter(items == main_item) |> pull(contrib) |> abs()
-        n_max <- data_size |> filter(items == main_item) |> pull(n) |> max()
-      } else if(!is.null(bar_max_value)) {
-        max_amount <- bar_max_value
-        n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
-      }
-    
-      x_levels <- as.character(seq_len(n_bars))
-      data_size <- tibble(x = factor(x_levels, levels = x_levels)) |>
+      bar_rate <- private$compute_bar_height(result, data_size, max_score, 
+                                             main_item, bar_max_value)
+
+      data_size <- tibble(x = factor(seq_len(n_bars))) |>
         mutate(items = c(labels[1], names, labels[2])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
         mutate(type = factor(type, levels = labels)) |>
-        mutate(n = n / n_max * max_amount)
+        mutate(n = n * bar_rate)
             
       p <- p +
         geom_col(data = data_size, aes(x, n, fill = type), width = 0.7, position = position_dodge()) +
@@ -445,7 +456,9 @@ ShipOfTheseus <- R6::R6Class(
       column_name <- rlang::ensym(column_name) |> rlang::as_string()
 
       labels <- private$labels
-      score2 <- private$compute_scores(column_name)[2]
+      scores <- private$compute_scores(column_name)
+      score2 <- scores[2]
+      max_score <- max(scores)
       plot_data <- private$prepare_plot_data(column_name, n, levels, continuous, flip = TRUE)
       
       result <- plot_data$result
@@ -487,27 +500,15 @@ ShipOfTheseus <- R6::R6Class(
         }
       }
 
-      if (is.null(main_item) & is.null(bar_max_value)) {
-        data_max <- result |> tail(-1) |> 
-          slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
-        max_item <- data_max |> pull(items)
-        max_amount <- data_max |> pull(contrib) |> abs()
-        n_max <- data_size |> filter(items == max_item) |> pull(n) |> max()
-      } else if(!is.null(main_item)) {
-        max_amount <- result |> filter(items == main_item) |> pull(contrib) |> abs()
-        n_max <- data_size |> filter(items == main_item) |> pull(n) |> max()
-      } else if(!is.null(bar_max_value)) {
-        max_amount <- bar_max_value
-        n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
-      }
-
-      x_levels <- as.character(seq_len(n_bars))
-      data_size <- tibble(x = factor(x_levels, levels = x_levels)) |>
+      bar_rate <- private$compute_bar_height(result, data_size, max_score, 
+                                             main_item, bar_max_value)
+      
+      data_size <- tibble(x = factor(seq_len(n_bars))) |>
         mutate(items = c(labels[2], names, labels[1])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
         mutate(type = factor(type, levels = rev(labels))) |>
-        mutate(n = n / n_max * max_amount)
+        mutate(n = n * bar_rate)
       
       p <- p +
         geom_col(data = data_size, aes(x, n, fill = type), width = 0.7, position = position_dodge()) +
