@@ -4,6 +4,9 @@
 
 * Fixed missing subgroup size bars in `plot()` and `plot_flip()` with
   **waterfalls** 1.1.4 and later.
+
+## Improvements  
+
 * Improved subgroup size bar scaling to use the maximum plot score consistently
   across plot directions (#14).
   
