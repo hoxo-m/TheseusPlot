@@ -17,11 +17,11 @@ want to investigate whether a particular subgroup is driving that
 difference. For example, when you observe a decline in a key metric
 compared with the previous year, you may want to conduct a more detailed
 analysis. In such an analysis, you might focus on one attribute, such as
-gender, and examine whether the decline was driven by the male users,
-the female users, or both. However, this type of analysis is challenging
-when the metric is a rate, because each subgroup’s contribution to the
-rate difference cannot be simply calculated, unlike in the case of
-volume metrics.
+gender, and examine whether the decline was driven by male users, female
+users, or both. However, this type of analysis is challenging when the
+metric is a rate, because each subgroup’s contribution to the rate
+difference cannot be simply calculated, unlike in the case of volume
+metrics.
 
 To address this issue, we propose an approach inspired by the story of
 the *[Ship of Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus)*.
@@ -38,14 +38,14 @@ points, reaching 5.4%. In this case, the contribution of male users to
 the change in CTR is -0.8 percentage points. Next, we replace the female
 users from 2024 with those from 2025. The dataset then consists entirely
 of 2025 data, and CTR drops by 0.2 percentage points, reaching 5.2%.
-Thus, the contribution of the female users is -0.2 percentage points.
+Thus, the contribution of female users is -0.2 percentage points.
 
 When visualized, the results appear as follows:
 
 <img src="man/figures/README-overview-1.png" alt="" width="500" />
 
 From this plot, we can see that the decline in CTR is primarily driven
-by the male users. We call this visualization the “Theseus Plot.”
+by male users. We call this visualization the “Theseus Plot.”
 
 The **TheseusPlot** package is designed to make it easy to generate
 Theseus Plots for any column that defines subgroups.
