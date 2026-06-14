@@ -26,7 +26,7 @@ waterfall-style Theseus Plots.
   The constructor of the \code{ShipOfTheseus} class.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{ShipOfTheseus$new(data1, data2, outcome, labels, ylab, digits, text_size)}
+    \preformatted{ShipOfTheseus$new(data1, data2, outcome, labels, xlab, ylab, digits, text_size)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -42,6 +42,8 @@ indicator (e.g., 0/1) that is aggregated to form rates.}
       \item{\code{labels}}{character vector of length 2 giving the labels for the two
 groups. The first corresponds to \code{data1}, the second to
 \code{data2}. Default is \code{c("Baseline", "Comparison")}.}
+      \item{\code{xlab}}{string specifying the x-axis label for plots. If \code{NULL}
+(default), no label is displayed.}
       \item{\code{ylab}}{string specifying the y-axis label for plots. If \code{NULL}
 (default), no label is displayed.}
       \item{\code{digits}}{integer indicating the number of decimal places to use for

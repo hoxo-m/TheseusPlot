@@ -9,6 +9,7 @@ create_ship(
   data2,
   y = "y",
   labels = c("Baseline", "Comparison"),
+  xlab = NULL,
   ylab = NULL,
   digits = 1L,
   text_size = 1
@@ -28,6 +29,9 @@ metric (default is \code{"y"}). Typically, this is a binary indicator
 \item{labels}{character vector of length 2 giving the labels for the two
 groups. The first corresponds to \code{data1}, the second to \code{data2}.
 Default is \code{c("Baseline", "Comparison")}.}
+
+\item{xlab}{string specifying the x-axis label for plots. If \code{NULL}
+(default), no label is displayed.}
 
 \item{ylab}{string specifying the y-axis label for plots. If \code{NULL}
 (default), no label is displayed.}
