@@ -9,6 +9,8 @@
 
 * Improved subgroup size bar scaling to use the maximum plot score consistently
   across plot directions (#14).
+* Updated the default group labels to `"Baseline"` and `"Comparison"` and the
+  default display precision to one decimal place (#16).
   
 # TheseusPlot 0.2.0
 
