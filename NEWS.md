@@ -1,4 +1,4 @@
-# TheseusPlot (development version)
+# TheseusPlot 0.3.0
 
 ## User-visible changes
 
