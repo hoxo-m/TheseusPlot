@@ -39,6 +39,40 @@ ShipOfTheseus <- R6::R6Class(
         ) |>
         # Standardize the outcome column name for internal use
         rename(.outcome = all_of(outcome))
+    },
+    
+    prepare_plot_data = function(column_name, n, levels, continuous, flip) {
+      result <- self$table(!!rlang::sym(column_name), n = n, continuous = continuous) |>
+        select(items = 1L, contrib)
+      
+      if (flip) {
+        result <- result |> mutate(contrib = -contrib)
+      }
+      
+      is_factor <- is.factor(result$items)
+      
+      if (is_factor) {
+        result <- if (flip) arrange(result, desc(items)) else arrange(result, items)
+      } else {
+        result <- arrange(result, contrib)
+      }
+      
+      data_size <- private$compute_size(
+        column_name,
+        target = result$items,
+        continuous = continuous
+      )
+      
+      if (!is.null(levels)) {
+        levels <- as.character(levels)
+        if (flip) levels <- rev(levels)
+        result <- data.frame(items = levels) |> inner_join(result, by = "items")
+      }
+      
+      list(
+        result = result,
+        data_size = data_size
+      )
     }
   ),
 
@@ -329,7 +363,6 @@ ShipOfTheseus <- R6::R6Class(
     #'
     #' @return A ggplot object representing the Theseus Plot for the specified column.
     #'
-    #' @importFrom tidyr replace_na
     #' @importFrom tibble tibble
     #' @importFrom waterfalls waterfall
     plot = function(column_name, n = 10L, main_item = NULL, bar_max_value = NULL,
@@ -337,26 +370,14 @@ ShipOfTheseus <- R6::R6Class(
       column_name <- rlang::ensym(column_name) |> rlang::as_string()
 
       labels <- private$labels
-
       score1 <- private$compute_scores(column_name)[1]
+      plot_data <- private$prepare_plot_data(column_name, n, levels, continuous, flip = FALSE)
+      
+      result <- plot_data$result
+      data_size <- plot_data$data_size
 
-      result <- self$table(!!rlang::sym(column_name), n = n, continuous = continuous) |>
-        select(items = 1L, contrib)
-      is_factor <- is.factor(result$items)
-      if (is_factor) {
-        result <- result |> arrange(items)
-      } else {
-        result <- result |> arrange(contrib)
-      }
-
-      data_size <- private$compute_size(column_name, target = result$items, continuous = continuous)
-
-      if (!is.null(levels)) {
-        levels <- as.character(levels)
-        result <- data.frame(items = levels) |> inner_join(result, by = "items")
-      }
       names <- as.character(result$items)
-      result <- tibble::tibble(items = labels[1], contrib = score1) |>
+      result <- tibble(items = labels[1], contrib = score1) |>
         bind_rows(result)|>
         mutate(contrib = round(contrib * 100, digits = private$digits))
 
@@ -383,7 +404,8 @@ ShipOfTheseus <- R6::R6Class(
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
     
-      data_size <- tibble(x = as.character(seq_len(n_bars))) |>
+      x_levels <- as.character(seq_len(n_bars))
+      data_size <- tibble(x = factor(x_levels, levels = x_levels)) |>
         mutate(items = c(labels[1], names, labels[2])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
@@ -423,25 +445,12 @@ ShipOfTheseus <- R6::R6Class(
       column_name <- rlang::ensym(column_name) |> rlang::as_string()
 
       labels <- private$labels
-
       score2 <- private$compute_scores(column_name)[2]
-
-      result <- self$table(!!rlang::sym(column_name), n = n, continuous = continuous) |>
-        select(items = 1L, contrib) |>
-        mutate(contrib = -contrib)
-
-      is_factor <- is.factor(result$items)
-      if (is_factor) {
-        result <- result |> arrange(desc(items))
-      } else {
-        result <- result |> arrange(contrib)
-      }
-      data_size <- private$compute_size(column_name, target = result$items, continuous = continuous)
-
-      if (!is.null(levels)) {
-        levels <- as.character(levels) |> rev()
-        result <- data.frame(items = levels) |> inner_join(result, by = "items")
-      }
+      plot_data <- private$prepare_plot_data(column_name, n, levels, continuous, flip = TRUE)
+      
+      result <- plot_data$result
+      data_size <- plot_data$data_size
+      
       names <- as.character(result$items)
       result <- tibble::tibble(items = labels[2], contrib = score2) |>
         bind_rows(result)|>
@@ -492,7 +501,8 @@ ShipOfTheseus <- R6::R6Class(
         n_max <- data_size |> filter(n == max(n)) |> pull(n) |> max()
       }
 
-      data_size <- tibble(x = as.character(seq_len(n_bars))) |>
+      x_levels <- as.character(seq_len(n_bars))
+      data_size <- tibble(x = factor(x_levels, levels = x_levels)) |>
         mutate(items = c(labels[2], names, labels[1])) |>
         left_join(data_size, by = "items") |>
         tidyr::replace_na(list(n = 0L)) |>
