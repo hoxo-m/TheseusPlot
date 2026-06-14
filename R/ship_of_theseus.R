@@ -96,21 +96,21 @@ ShipOfTheseus <- R6::R6Class(
     #' The constructor of the \code{ShipOfTheseus} class.
     #'
     #' @param data1 data frame representing the first group (e.g., the baseline
-    #'   or "original" data).
+    #'   data).
     #' @param data2 data frame representing the second group (e.g., the
-    #'   comparison or "refitted" data).
+    #'   comparison data).
     #' @param outcome string specifying the outcome variable used to compute the
     #'   rate metric (default is \code{"y"}). Typically, this is a binary
     #'   indicator (e.g., 0/1) that is aggregated to form rates.
     #' @param labels character vector of length 2 giving the labels for the two
     #'   groups. The first corresponds to \code{data1}, the second to
-    #'   \code{data2}. Default is \code{c("Original", "Refitted")}.
+    #'   \code{data2}. Default is \code{c("Baseline", "Comparison")}.
     #' @param ylab string specifying the y-axis label for plots. If \code{NULL}
     #'   (default), no label is displayed.
     #' @param digits integer indicating the number of decimal places to use for
-    #'   displaying numeric values (default is \code{3}).
+    #'   displaying numeric values (default is \code{1}).
     #' @param text_size numeric value specifying the relative size of text
-    #'   elements in plots (default is \code{1}).
+    #'   elements in plots (default is \code{1.0}).
     #'
     #' @return A \code{ShipOfTheseus} object, which can be used with
     #'   \code{plot()} to create Theseus plots.

@@ -33,21 +33,21 @@ waterfall-style Theseus Plots.
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{data1}}{data frame representing the first group (e.g., the baseline
-or "original" data).}
+data).}
       \item{\code{data2}}{data frame representing the second group (e.g., the
-comparison or "refitted" data).}
+comparison data).}
       \item{\code{outcome}}{string specifying the outcome variable used to compute the
 rate metric (default is \code{"y"}). Typically, this is a binary
 indicator (e.g., 0/1) that is aggregated to form rates.}
       \item{\code{labels}}{character vector of length 2 giving the labels for the two
 groups. The first corresponds to \code{data1}, the second to
-\code{data2}. Default is \code{c("Original", "Refitted")}.}
+\code{data2}. Default is \code{c("Baseline", "Comparison")}.}
       \item{\code{ylab}}{string specifying the y-axis label for plots. If \code{NULL}
 (default), no label is displayed.}
       \item{\code{digits}}{integer indicating the number of decimal places to use for
-displaying numeric values (default is \code{3}).}
+displaying numeric values (default is \code{1}).}
       \item{\code{text_size}}{numeric value specifying the relative size of text
-elements in plots (default is \code{1}).}
+elements in plots (default is \code{1.0}).}
     }
     \if{html}{\out{</div>}}
   }

@@ -46,11 +46,11 @@ test_that("plots respect factor level order", {
 
   expect_equal(
     panel$x$get_labels(),
-    c("Original", "Low", "Medium", "High", "Refitted")
+    c("Baseline", "Low", "Medium", "High", "Comparison")
   )
   expect_equal(
     get_factor_order_size_bar_items(plot),
-    c("Original", rep(c("Low", "Medium", "High"), each = 2L), "Refitted")
+    c("Baseline", rep(c("Low", "Medium", "High"), each = 2L), "Comparison")
   )
 })
 
@@ -60,10 +60,10 @@ test_that("flipped plots reverse factor level order", {
 
   expect_equal(
     panel$y$get_labels(),
-    c("Refitted", "High", "Medium", "Low", "Original")
+    c("Comparison", "High", "Medium", "Low", "Baseline")
   )
   expect_equal(
     get_factor_order_size_bar_items(plot),
-    c("Refitted", rep(c("High", "Medium", "Low"), each = 2L), "Original")
+    c("Comparison", rep(c("High", "Medium", "Low"), each = 2L), "Baseline")
   )
 })

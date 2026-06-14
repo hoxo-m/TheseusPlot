@@ -8,18 +8,18 @@ create_ship(
   data1,
   data2,
   y = "y",
-  labels = c("Original", "Refitted"),
+  labels = c("Baseline", "Comparison"),
   ylab = NULL,
-  digits = 3L,
+  digits = 1L,
   text_size = 1
 )
 }
 \arguments{
-\item{data1}{data frame representing the first group (e.g., the baseline or
-"original" data).}
+\item{data1}{data frame representing the first group (e.g., the baseline
+data).}
 
 \item{data2}{data frame representing the second group (e.g., the comparison
-or "refitted" data).}
+data).}
 
 \item{y}{column name specifying the outcome variable used to compute the rate
 metric (default is \code{"y"}). Typically, this is a binary indicator
@@ -27,16 +27,16 @@ metric (default is \code{"y"}). Typically, this is a binary indicator
 
 \item{labels}{character vector of length 2 giving the labels for the two
 groups. The first corresponds to \code{data1}, the second to \code{data2}.
-Default is \code{c("Original", "Refitted")}.}
+Default is \code{c("Baseline", "Comparison")}.}
 
 \item{ylab}{string specifying the y-axis label for plots. If \code{NULL}
 (default), no label is displayed.}
 
 \item{digits}{integer indicating the number of decimal places to use for
-displaying numeric values (default is 3).}
+displaying numeric values (default is \code{1}).}
 
 \item{text_size}{numeric value specifying the relative size of text elements
-in plots (default is 1.0).}
+in plots (default is \code{1.0}).}
 }
 \value{
 A \link{ShipOfTheseus} object, which can be used with \code{plot()}
