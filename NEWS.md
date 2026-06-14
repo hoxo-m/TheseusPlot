@@ -4,13 +4,17 @@
 
 * Fixed missing subgroup size bars in `plot()` and `plot_flip()` with
   **waterfalls** 1.1.4 and later.
+* Fixed `text_size` handling in `plot()` and `plot_flip()` when applying the
+  current ggplot2 theme. (#17)
 
 ## Improvements  
 
 * Improved subgroup size bar scaling to use the maximum plot score consistently
-  across plot directions (#14).
+  across plot directions. (#14)
 * Updated the default group labels to `"Baseline"` and `"Comparison"` and the
-  default display precision to one decimal place (#16).
+  default display precision to one decimal place. (#16)
+* Added an `xlab` argument to customize plot x-axis labels. (#17)
+* Removed the automatic column-name subtitle from plots. (#17)
   
 # TheseusPlot 0.2.0
 
