@@ -1,20 +1,22 @@
 # TheseusPlot (development version)
 
-## Bug fixes
+## User-visible changes
 
-* Fixed missing subgroup size bars in `plot()` and `plot_flip()` with
-  **waterfalls** 1.1.4 and later.
+* Added an `xlab` argument to `create_ship()` for customizing the x-axis label
+  used by `plot()` and `plot_flip()`.
+* The automatic column-name subtitle was removed.
+* Changed the default group labels from `"Original"` and `"Refitted"` to
+  `"Baseline"` and `"Comparison"`.
+* Changed the default number of displayed decimal places from 3 to 1.
+
+## Plot improvements and bug fixes
+
+* Fixed missing subgroup size bars in `plot()` and `plot_flip()` with 
+  **waterfalls** 1.1.4.
+* Improved subgroup size bar scaling so that bar heights are computed
+  consistently from the maximum plot score in both `plot()` and `plot_flip()`.
 * Fixed `text_size` handling in `plot()` and `plot_flip()` when applying the
-  current ggplot2 theme. (#17)
-
-## Improvements  
-
-* Improved subgroup size bar scaling to use the maximum plot score consistently
-  across plot directions. (#14)
-* Updated the default group labels to `"Baseline"` and `"Comparison"` and the
-  default display precision to one decimal place. (#16)
-* Added an `xlab` argument to customize plot x-axis labels. (#17)
-* Removed the automatic column-name subtitle from plots. (#17)
+  current ggplot2 theme.
   
 # TheseusPlot 0.2.0
 
