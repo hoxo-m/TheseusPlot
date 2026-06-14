@@ -233,14 +233,14 @@ This is useful when the categories have a natural order, such as
 manually.
 
 For example, suppose we classify departure delays into three categories:
-`"Early"`, `"On-time"`, and `"Delayed"`.
+`"Early"`, `"On time"`, and `"Delayed"`.
 
 When `departure_type` is a character column, the categories are ordered
 by their contributions.
 
 ``` r
 to_departure_type <- function(x) {
-  case_when(x <= -4 ~ "Early", x <= 4 ~ "On-time", x > 4 ~ "Delayed")
+  case_when(x <= -4 ~ "Early", x <= 4 ~ "On time", x > 4 ~ "Delayed")
 }
 
 data_Nov <- data_Nov |> mutate(departure_type = to_departure_type(dep_delay))
@@ -258,8 +258,8 @@ To display the categories in a meaningful order, convert
 
 ``` r
 to_departure_type <- function(x) {
-  types <- case_when(x <= -4 ~ "Early", x <= 4 ~ "On-time", x > 4 ~ "Delayed")
-  types <- factor(types, levels = c("Early", "On-time", "Delayed"))
+  types <- case_when(x <= -4 ~ "Early", x <= 4 ~ "On time", x > 4 ~ "Delayed")
+  types <- factor(types, levels = c("Early", "On time", "Delayed"))
   types
 }
 
