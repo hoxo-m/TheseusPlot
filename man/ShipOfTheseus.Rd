@@ -5,10 +5,9 @@
 \title{An R6 Class for Generating Theseus Plot}
 \description{
 The \code{ShipOfTheseus} class decomposes the difference in outcome rates
-between two datasets and visualizes the results as a Theseus Plot. It
-provides methods to compute contributions of individual attributes, summarize
-results in tables, and generate waterfall-style plots for intuitive
-interpretation.
+between two datasets. For a selected column, it computes subgroup
+contributions, summarizes the results in tables, and visualizes them as
+waterfall-style Theseus Plots.
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -72,15 +71,15 @@ elements in plots (default is \code{1}).}
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{column_name}}{string. The name of the column to analyze.}
-      \item{\code{n}}{integer. Maximum number of top contributing attributes to display.
-If the number of attributes exceeds `n`, the remaining are aggregated.}
+      \item{\code{n}}{integer. Maximum number of top contributing subgroups to display.
+If the number of subgroups exceeds `n`, the remaining are aggregated.}
       \item{\code{continuous}}{list. A configuration list for handling continuous
 variables (e.g., specifying number of bins or custom breaks).}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A tibble summarizing each attribute's contribution to the
+    A tibble summarizing each subgroups's contribution to the
   difference between the two groups, including counts, total outcomes,
   and rates for each subgroup.
   }
@@ -107,12 +106,12 @@ variables (e.g., specifying number of bins or custom breaks).}
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{column_name}}{The name of the column to visualize.}
-      \item{\code{n}}{integer. Maximum number of top contributing attributes to display.
-Remaining attributes are aggregated if necessary.}
-      \item{\code{main_item}}{string. The attribute used as the reference for scaling
+      \item{\code{n}}{integer. Maximum number of top contributing subgroups to display.
+Remaining subgroups are aggregated if necessary.}
+      \item{\code{main_item}}{string. The subgroup used as the reference for scaling
 the bar heights.}
       \item{\code{bar_max_value}}{numeric. Maximum value for scaling the contribution bars.}
-      \item{\code{levels}}{character vector specifying the display order of attributes.}
+      \item{\code{levels}}{character vector specifying the display order of subgroups}
       \item{\code{continuous}}{list. Configuration for handling continuous variables
 (e.g., number of bins or custom breaks).}
     }
@@ -144,12 +143,12 @@ the bar heights.}
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{column_name}}{The name of the column to visualize.}
-      \item{\code{n}}{integer. Maximum number of top contributing attributes to display.
-Remaining attributes are aggregated if necessary.}
-      \item{\code{main_item}}{string. The attribute used as the reference for scaling
+      \item{\code{n}}{integer. Maximum number of top contributing subgroups to display.
+Remaining subgroups are aggregated if necessary.}
+      \item{\code{main_item}}{string. The subgroup used as the reference for scaling
 the bar heights.}
       \item{\code{bar_max_value}}{numeric. Maximum value for scaling the contribution bars.}
-      \item{\code{levels}}{character vector specifying the display order of attributes.}
+      \item{\code{levels}}{character vector specifying the display order of subgroups}
       \item{\code{continuous}}{list. Configuration for handling continuous variables
 (e.g., number of bins or custom breaks).}
     }

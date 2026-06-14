@@ -5,10 +5,9 @@ NULL
 #'
 #' @description
 #' The \code{ShipOfTheseus} class decomposes the difference in outcome rates
-#' between two datasets and visualizes the results as a Theseus Plot. It
-#' provides methods to compute contributions of individual attributes, summarize
-#' results in tables, and generate waterfall-style plots for intuitive
-#' interpretation.
+#' between two datasets. For a selected column, it computes subgroup
+#' contributions, summarizes the results in tables, and visualizes them as
+#' waterfall-style Theseus Plots.
 #'
 #' @import dplyr ggplot2 stringr
 #'
@@ -78,12 +77,7 @@ ShipOfTheseus <- R6::R6Class(
     compute_bar_height = function(result, data_size, max_score, main_item = NULL,
                                   bar_max_value = NULL, bar_min_ratio = 0.15) {
       if (is.null(main_item) & is.null(bar_max_value)) {
-        # data_max <- result |> tail(-1) |>
-        #   slice_max(order_by = abs(contrib), n = 1, with_ties = FALSE)
-        # max_item <- data_max |> pull(items)
-        # max_amount <- data_max |> pull(contrib) |> abs()
         max_amount <- max_score * 100 * bar_min_ratio
-        # n_max <- data_size |> filter(items == max_item) |> pull(n) |> max()
         n_max <- data_size |> tail(-1) |> 
           slice_max(order_by = n, n = 1, with_ties = FALSE) |> pull(n)
       } else if(!is.null(main_item)) {
@@ -325,12 +319,12 @@ ShipOfTheseus <- R6::R6Class(
     #' Generate a contribution table for a given column.
     #'
     #' @param column_name string. The name of the column to analyze.
-    #' @param n integer. Maximum number of top contributing attributes to display.
-    #'   If the number of attributes exceeds `n`, the remaining are aggregated.
+    #' @param n integer. Maximum number of top contributing subgroups to display.
+    #'   If the number of subgroups exceeds `n`, the remaining are aggregated.
     #' @param continuous list. A configuration list for handling continuous
     #'   variables (e.g., specifying number of bins or custom breaks).
     #'
-    #' @return A tibble summarizing each attribute's contribution to the
+    #' @return A tibble summarizing each subgroups's contribution to the
     #'   difference between the two groups, including counts, total outcomes,
     #'   and rates for each subgroup.
     table = function(column_name, n = Inf, continuous = continuous_config()) {
@@ -353,13 +347,13 @@ ShipOfTheseus <- R6::R6Class(
           mutate(items = as.character(items))
         result_tail <- tail(result |> arrange(desc(abs(contrib))), n_other)
         result_other <- result_tail |>
-          mutate(items = str_glue("Sum of {n_other} other attributes")) |>
+          mutate(items = str_glue("Sum of {n_other} other subgroups")) |>
           group_by(items) |>
           summarise_at(vars(contrib, n1, n2, x1, x2), sum) |>
           mutate(rate1 = x1 / n1, rate2 = x2 / n2)
         result <- bind_rows(result_head, result_other)
         if (is_factor) {
-          levels <- c(levels, str_glue("Sum of {n_other} other attributes"))
+          levels <- c(levels, str_glue("Sum of {n_other} other subgroups"))
           result <- result |>
             mutate(items = factor(items, levels = levels)) |>
             arrange(items)
@@ -373,12 +367,12 @@ ShipOfTheseus <- R6::R6Class(
     #' Generate a Theseus plot for a specified column
     #'
     #' @param column_name The name of the column to visualize.
-    #' @param n integer. Maximum number of top contributing attributes to display.
-    #'   Remaining attributes are aggregated if necessary.
-    #' @param main_item string. The attribute used as the reference for scaling
+    #' @param n integer. Maximum number of top contributing subgroups to display.
+    #'   Remaining subgroups are aggregated if necessary.
+    #' @param main_item string. The subgroup used as the reference for scaling
     #'   the bar heights.
     #' @param bar_max_value numeric. Maximum value for scaling the contribution bars.
-    #' @param levels character vector specifying the display order of attributes.
+    #' @param levels character vector specifying the display order of subgroups
     #' @param continuous list. Configuration for handling continuous variables
     #'   (e.g., number of bins or custom breaks).
     #'
@@ -437,12 +431,12 @@ ShipOfTheseus <- R6::R6Class(
     #' Generate a Theseus plot for a specified column
     #'
     #' @param column_name The name of the column to visualize.
-    #' @param n integer. Maximum number of top contributing attributes to display.
-    #'   Remaining attributes are aggregated if necessary.
-    #' @param main_item string. The attribute used as the reference for scaling
+    #' @param n integer. Maximum number of top contributing subgroups to display.
+    #'   Remaining subgroups are aggregated if necessary.
+    #' @param main_item string. The subgroup used as the reference for scaling
     #'   the bar heights.
     #' @param bar_max_value numeric. Maximum value for scaling the contribution bars.
-    #' @param levels character vector specifying the display order of attributes.
+    #' @param levels character vector specifying the display order of subgroups
     #' @param continuous list. Configuration for handling continuous variables
     #'   (e.g., number of bins or custom breaks).
     #'

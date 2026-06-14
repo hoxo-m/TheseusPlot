@@ -29,7 +29,7 @@ knitr::opts_chunk$set(
 
 In data analysis, when a metric differs between two groups, we sometimes want to investigate whether a particular subgroup is driving that difference.
 For example, when a key metric decline is detected compared to the previous year, you may want to conduct a more detailed analysis. 
-In this analysis, you may focus on gender among the attributes and examine whether the decline occurred among male, female, or both.
+In this analysis, you may focus on gender and examine whether the decline was driven by the male subgroup, the female subgroup, or both.
 However, this type of analysis is challenging when the metric is a rate, because the magnitude of each subgroup’s contribution to the rate cannot be simply calculated, unlike in the case of volume metrics.
 
 To address this issue, we propose an approach inspired by the story of the *[Ship of Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus)*.
@@ -71,7 +71,7 @@ ship$plot(gender)
 From this plot, we can see that the decline in the metric is primarily driven by the male group.
 We call this visualization the “Theseus Plot.”
 
-The **TheseusPlot** package is designed to make it easy to generate Theseus Plots for various attributes.
+The **TheseusPlot** package is designed to make it easy to generate Theseus Plots for different subgroup-defining columns.
 
 ## 2. Installation
 
