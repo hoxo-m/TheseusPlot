@@ -2,6 +2,8 @@
 
 ## TheseusPlot 0.3.0
 
+CRAN release: 2026-06-14
+
 ### User-visible changes
 
 - Added an `xlab` argument to
